@@ -15,8 +15,8 @@ export default function Home() {
   return (
     <>
     <JsonLd data={homeGraph} />
-    <div className="flex h-[calc(100dvh-4rem)] flex-col lg:h-[calc(100dvh-5rem)]">
-    <section className="relative flex flex-1 overflow-hidden bg-gradient-to-b from-brand-50 via-white to-white">
+    <div className="flex flex-col lg:h-[calc(100dvh-5rem)]">
+    <section className="relative flex flex-1 overflow-hidden bg-gradient-to-b from-brand-50 via-white to-white py-12 sm:py-16 lg:py-0">
       <div className="bg-dots pointer-events-none absolute -left-10 top-10 h-64 w-64 opacity-40" />
       <div className="bg-dots pointer-events-none absolute -right-10 top-40 h-96 w-72 opacity-40" />
 
