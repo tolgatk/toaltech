@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import ConditionalFooter from "@/components/ConditionalFooter";
-import FloatingButtons from "@/components/FloatingButtons";
+import ConditionalFloatingButtons from "@/components/ConditionalFloatingButtons";
+import MainShell from "@/components/MainShell";
 import { SITE_URL } from "@/lib/seo";
 
 const inter = Inter({ subsets: ["latin", "latin-ext"], variable: "--font-inter", display: "swap" });
@@ -28,9 +29,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           İçeriğe atla
         </a>
         <Header />
-        <main id="icerik" className="flex-1 pb-24 sm:pb-0">{children}</main>
+        <MainShell>{children}</MainShell>
         <ConditionalFooter />
-        <FloatingButtons />
+        <ConditionalFloatingButtons />
       </body>
     </html>
   );

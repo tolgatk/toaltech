@@ -6,7 +6,7 @@ import { abs, CONTENT_UPDATED } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date(CONTENT_UPDATED);
-  const statics = ["/", "/hizmetlerimiz", "/paketlerimiz", "/hakkimizda", "/referanslar", "/iletisim", "/blog", "/kvkk-aydinlatma-metni"].map((p) => ({ url: abs(p), lastModified }));
+  const statics = ["/", "/hizmetlerimiz", "/paketlerimiz", "/hakkimizda", "/referanslar", "/iletisim", "/blog", "/kvkk-aydinlatma-metni", "/kartvizit"].map((p) => ({ url: abs(p), lastModified }));
   const hubs = localServices.map((s) => ({ url: abs(`/${s.slug}`), lastModified }));
   const locals = localServices.flatMap((s) => districts.map((d) => ({ url: abs(`/${s.slug}/${d.slug}`), lastModified })));
   const blog = posts.map((p) => ({ url: abs(`/blog/${p.slug}`), lastModified: new Date(p.date) }));
