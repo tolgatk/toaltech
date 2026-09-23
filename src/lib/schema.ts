@@ -124,3 +124,28 @@ export const articleGraph = (a: { slug: string; title: string; description: stri
     },
   ],
 });
+
+/** Cam tablo sayfaları: WebPage + Service, sayfanın ana görseli ile */
+export const camTabloGraph = (path: string, name: string, description: string, area: { name: string; type: "City" | "AdministrativeArea" | "Place"; within?: string }) => ({
+  "@context": CTX,
+  "@graph": [
+    {
+      ...webPage(path, name, description, path === "/cam-tablo" ? "CollectionPage" : "WebPage"),
+      primaryImageOfPage: { "@type": "ImageObject", url: abs("/cam-tablo/istanbul-cam-tablo-salon-dekorasyon.jpg"), width: 1600, height: 1060 },
+    },
+    {
+      "@type": "Service",
+      "@id": `${abs(path)}#service`,
+      name,
+      serviceType: "Cam tablo baskı ve satışı",
+      description,
+      url: abs(path),
+      provider: { "@id": ORG_ID },
+      ...(path === "/cam-tablo" ? {} : { isRelatedTo: { "@id": `${abs("/cam-tablo")}#service` } }),
+      areaServed:
+        area.type === "City"
+          ? istanbulAreaServed
+          : { "@type": area.type, name: area.name, containedInPlace: area.within ? { "@type": "AdministrativeArea", name: area.within, containedInPlace: { "@type": "City", name: "İstanbul" } } : { "@type": "City", name: "İstanbul" } },
+    },
+  ],
+});

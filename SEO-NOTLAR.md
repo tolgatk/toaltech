@@ -19,3 +19,10 @@
 ## Dosya haritası
 - `src/lib/seo.ts` site URL + lastmod · `src/lib/schema.ts` JSON-LD · `src/lib/districts.ts` ilçeler · `src/lib/localServices.ts` hizmetler · `src/lib/localContent.ts` ilçe içerik motoru · `src/lib/tr.ts` Türkçe ekler · `src/lib/posts.ts` blog yazıları
 - `src/app/[hizmet]/page.tsx` hub · `src/app/[hizmet]/[ilce]/page.tsx` ilçe · `src/app/blog/*` · `src/app/sitemap.ts` · `src/app/robots.ts` · `src/app/manifest.ts`
+
+## Cam Tablo (24 Eylül 2026)
+- **Sayfalar:** `/cam-tablo` (İstanbul hub) + 39 ilçe (`/cam-tablo/[ilce]`) + 45 semt (`/cam-tablo/[ilce]/[semt]`, ör. `/cam-tablo/sisli/nisantasi`) = 85 URL, sitemap'te (`CAM_TABLO_UPDATED`).
+- **İçerik:** `src/lib/camTablo.ts` — modeller, ölçü tablosu, odaya göre seçim, SSS, ilçeye özel dekorasyon notu (`ilceDecorNotes`), semt listesi ve notları (`semtler`). Yeni semt eklemek = `semtler` dizisine bir satır.
+- **Görsel:** `public/cam-tablo/istanbul-cam-tablo-salon-dekorasyon.jpg` (Unsplash, Caroline Badran, ücretsiz ticari lisans). Gerçek ürün fotoğrafları gelince bununla değiştir; özgün görsel Google Görseller'de de trafik getirir.
+- **Kontrol et:** "4 mm temperli cam / UV baskı / askı aparatı" teknik bilgileri ve teslimat ifadeleri gerçek üretimle uyuşmalı.
+- **1. sıra için kod dışı:** Google Business Profile'a "Cam tablo" ürün/hizmet ekle, Instagram'da ilçe etiketli gerçek montaj fotoğrafları paylaş, gerçek müşteri yorumları topla, Search Console'da `/cam-tablo` URL'lerini dizine eklet.

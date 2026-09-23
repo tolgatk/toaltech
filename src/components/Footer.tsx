@@ -36,6 +36,9 @@ export default function Footer() {
                 <Link href={`/${s.slug}`} className="hover:text-brand-500">İstanbul {s.name}</Link>
               </li>
             ))}
+            <li>
+              <Link href="/cam-tablo" className="hover:text-brand-500">İstanbul Cam Tablo</Link>
+            </li>
           </ul>
         </div>
         <div>
