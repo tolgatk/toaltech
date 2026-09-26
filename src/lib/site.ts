@@ -4,6 +4,7 @@ export const site = {
   phoneDisplay: "0535 515 22 37",
   phoneTel: "+905355152237",
   whatsapp: "https://wa.me/905355152237?text=Merhaba%2C%20hizmetleriniz%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum.",
+  camTabloWhatsapp: "https://wa.me/905355152237?text=Merhaba%2C%20cam%20tablo%20hakk%C4%B1nda%20bilgi%20ve%20fiyat%20almak%20istiyorum.",
   instagram: "https://instagram.com/toaltechcom",
   instagramHandle: "@toaltechcom",
   email: "info@toaltech.com",

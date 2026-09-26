@@ -3,4 +3,4 @@ export const abs = (path: string) => `${SITE_URL}${path}`;
 /** İçerikte anlamlı bir değişiklik yaptığında güncelle (sitemap lastmod). */
 export const CONTENT_UPDATED = "2026-08-25";
 /** Cam tablo sayfalarının son içerik güncellemesi (sitemap lastmod). */
-export const CAM_TABLO_UPDATED = "2026-09-24";
+export const CAM_TABLO_UPDATED = "2026-09-27";

@@ -3,6 +3,7 @@ import { localServices } from "@/lib/localServices";
 import { districts } from "@/lib/districts";
 import { posts } from "@/lib/posts";
 import { semtler } from "@/lib/camTablo";
+import { iller } from "@/lib/iller";
 import { abs, CAM_TABLO_UPDATED, CONTENT_UPDATED } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -14,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: abs("/cam-tablo"), lastModified: new Date(CAM_TABLO_UPDATED) },
     ...districts.map((d) => ({ url: abs(`/cam-tablo/${d.slug}`), lastModified: new Date(CAM_TABLO_UPDATED) })),
     ...semtler.map((s) => ({ url: abs(`/cam-tablo/${s.ilce}/${s.slug}`), lastModified: new Date(CAM_TABLO_UPDATED) })),
+    ...iller.map((i) => ({ url: abs(`/cam-tablo/${i.slug}`), lastModified: new Date(CAM_TABLO_UPDATED) })),
   ];
   const blog = posts.map((p) => ({ url: abs(`/blog/${p.slug}`), lastModified: new Date(p.date) }));
   return [...statics, ...hubs, ...camTablo, ...blog, ...locals];

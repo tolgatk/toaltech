@@ -5,26 +5,30 @@ import { MapPin } from "lucide-react";
 import { Container } from "@/components/ui";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import ContactBanner from "@/components/ContactBanner";
-import { CamTabloFaq, CamTabloHero, CamTabloModels, CamTabloSizesAndRooms, CamTabloSteps } from "@/components/CamTablo";
+import { CamTabloFaq, CamTabloHero, CamTabloCollections, CamTabloCta, CamTabloSizesAndRooms, CamTabloSteps } from "@/components/CamTablo";
 import { districts, getDistrict } from "@/lib/districts";
 import { camTabloFaq, ilceDecorNotes, ilceFaq, ilceIntro, nearbyDistricts, otherNeighborhoods, semtlerOf } from "@/lib/camTablo";
 import { camTabloGraph } from "@/lib/schema";
+import { getIl, iller } from "@/lib/iller";
+import CamTabloIlPage, { ilMetadata } from "@/components/CamTabloIl";
 import { de, nin } from "@/lib/tr";
 import { abs } from "@/lib/seo";
 
+/** Bu segment hem İstanbul ilçelerini (/cam-tablo/kadikoy) hem Türkiye illerini (/cam-tablo/ankara) karşılar; slug'lar çakışmaz */
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return districts.map((d) => ({ ilce: d.slug }));
+  return [...districts.map((d) => ({ ilce: d.slug })), ...iller.map((i) => ({ ilce: i.slug }))];
 }
 
 type Params = Promise<{ ilce: string }>;
 
 const describe = (name: string, areas: string[]) =>
-  `${name} cam tablo: ${areas.slice(0, 2).join(", ")} dahil ${nin(name)} tüm mahalleleri için modern, 3'lü set, saatli ve kişiye özel fotoğraflı cam tablo modelleri. Ölçü ve fiyat için WhatsApp'tan yazın.`;
+  `${name} cam tablo: ${areas.slice(0, 2).join(", ")} dahil ${nin(name)} tüm mahalleleri için 1.800+ tasarım ve kişiye özel fotoğraflı cam tablo. 4 mm temperli cam, 35×50 cm 1.200 ₺'den başlayan fiyatlar.`;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { ilce } = await params;
+  const il = getIl(ilce);
+  if (il) return ilMetadata(il);
   const d = getDistrict(ilce);
   if (!d) return {};
   const title = `${d.name} Cam Tablo: Modern ve Kişiye Özel Modeller`;
@@ -35,6 +39,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 export default async function Page({ params }: { params: Params }) {
   const { ilce } = await params;
+  const il = getIl(ilce);
+  if (il) return <CamTabloIlPage il={il} />;
   const d = getDistrict(ilce);
   if (!d) notFound();
 
@@ -49,7 +55,7 @@ export default async function Page({ params }: { params: Params }) {
         eyebrow={`İstanbul ${d.side} Yakası · ${d.name}`}
         title={`${d.name} Cam Tablo`}
         intro={ilceIntro(d)}
-        yer={d.name}
+        campaign={`cam-tablo-${d.slug}`}
         alt={`${d.name} cam tablo: modern salon duvarında parlak yüzeyli büyük cam tablo`}
         breadcrumbs={<Breadcrumbs items={[{ name: "Cam Tablo", href: "/cam-tablo" }, { name: d.name, href: path }]} />}
       />
@@ -76,7 +82,7 @@ export default async function Page({ params }: { params: Params }) {
         </p>
       </Container>
 
-      <CamTabloModels title={`${d.name} Cam Tablo Modelleri`} />
+      <CamTabloCollections title={`${d.name} Cam Tablo Modelleri`} place={de(d.name)} campaign={`cam-tablo-${d.slug}`} />
       <CamTabloSizesAndRooms place={de(d.name)} />
       <CamTabloSteps />
       <CamTabloFaq title={`${d.name} Cam Tablo — Sık Sorulan Sorular`} faqs={[...ilceFaq(d), ...camTabloFaq.slice(0, 4)]} />
@@ -94,7 +100,7 @@ export default async function Page({ params }: { params: Params }) {
           Tüm ilçeler: <Link href="/cam-tablo" className="font-medium text-brand-500 hover:underline">İstanbul Cam Tablo</Link>
         </p>
       </Container>
-      <ContactBanner />
+      <CamTabloCta campaign={`cam-tablo-${d.slug}`} />
     </>
   );
 }

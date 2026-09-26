@@ -7,7 +7,8 @@ import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import Logo from "./Logo";
 import { WhatsAppIcon } from "./Icons";
 import { nav, site } from "@/lib/site";
-import { isBareRoute } from "@/lib/routes";
+import { isBareRoute, isFocusedRoute } from "@/lib/routes";
+import FocusedHeader from "./FocusedHeader";
 import { localServices } from "@/lib/localServices";
 
 export default function Header() {
@@ -16,6 +17,7 @@ export default function Header() {
 
   // Kartvizit gibi tam ekran rotalarda site başlığı gizlenir.
   if (isBareRoute(pathname)) return null;
+  if (isFocusedRoute(pathname)) return <FocusedHeader />;
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">

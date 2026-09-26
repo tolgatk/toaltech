@@ -126,12 +126,13 @@ export const articleGraph = (a: { slug: string; title: string; description: stri
 });
 
 /** Cam tablo sayfaları: WebPage + Service, sayfanın ana görseli ile */
-export const camTabloGraph = (path: string, name: string, description: string, area: { name: string; type: "City" | "AdministrativeArea" | "Place"; within?: string }) => ({
+/** area.country: il sayfaları (Türkiye'nin ili); yoksa İstanbul ilçe/semt varsayılır */
+export const camTabloGraph = (path: string, name: string, description: string, area: { name: string; type: "City" | "AdministrativeArea" | "Place"; within?: string; country?: boolean }) => ({
   "@context": CTX,
   "@graph": [
     {
       ...webPage(path, name, description, path === "/cam-tablo" ? "CollectionPage" : "WebPage"),
-      primaryImageOfPage: { "@type": "ImageObject", url: abs("/cam-tablo/istanbul-cam-tablo-salon-dekorasyon.jpg"), width: 1600, height: 1060 },
+      primaryImageOfPage: { "@type": "ImageObject", url: abs("/cam-tablo/cam-tablo-salon-dekorasyon.webp"), width: 2560, height: 1429 },
     },
     {
       "@type": "Service",
@@ -144,7 +145,9 @@ export const camTabloGraph = (path: string, name: string, description: string, a
       ...(path === "/cam-tablo" ? {} : { isRelatedTo: { "@id": `${abs("/cam-tablo")}#service` } }),
       areaServed:
         area.type === "City"
-          ? istanbulAreaServed
+          ? [...istanbulAreaServed, { "@type": "Country", name: "Türkiye" }]
+          : area.country
+          ? { "@type": "AdministrativeArea", name: area.name, containedInPlace: { "@type": "Country", name: "Türkiye" } }
           : { "@type": area.type, name: area.name, containedInPlace: area.within ? { "@type": "AdministrativeArea", name: area.within, containedInPlace: { "@type": "City", name: "İstanbul" } } : { "@type": "City", name: "İstanbul" } },
     },
   ],

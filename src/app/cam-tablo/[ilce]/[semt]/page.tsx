@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/ui";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import ContactBanner from "@/components/ContactBanner";
-import { CamTabloFaq, CamTabloHero, CamTabloModels, CamTabloSizesAndRooms, CamTabloSteps } from "@/components/CamTablo";
+import { CamTabloFaq, CamTabloHero, CamTabloCollections, CamTabloCta, CamTabloSizesAndRooms, CamTabloSteps } from "@/components/CamTablo";
 import { getDistrict } from "@/lib/districts";
 import { camTabloFaq, getSemt, semtler, semtlerOf } from "@/lib/camTablo";
 import { camTabloGraph } from "@/lib/schema";
@@ -20,7 +19,7 @@ export function generateStaticParams() {
 type Params = Promise<{ ilce: string; semt: string }>;
 
 const describe = (semt: string, ilce: string) =>
-  `${semt} cam tablo (${ilce}): modern, büyük ölçülü, 3'lü set ve kişiye özel fotoğraflı cam tablo modelleri. ${semt} adresinize teslimat; ölçü ve fiyat için WhatsApp'tan yazın.`;
+  `${semt} cam tablo (${ilce}): 1.800+ tasarım ve kişiye özel fotoğraflı cam tablo, 4 mm temperli cam. 35×50 cm 1.200 ₺'den başlayan fiyatlar, ${semt} adresinize teslimat.`;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { ilce, semt } = await params;
@@ -42,7 +41,7 @@ export default async function Page({ params }: { params: Params }) {
   const path = `/cam-tablo/${d.slug}/${s.slug}`;
   const siblings = semtlerOf(d.slug).filter((x) => x.slug !== s.slug);
   const faqs = [
-    { q: `${s.name} cam tablo teslimatı yapıyor musunuz?`, a: `Evet. ${s.name} ve ${nin(d.name)} tüm mahallelerine cam tablo teslimatı yapıyoruz. Teslim süresi ölçüye ve kişiye özel tasarım olup olmadığına göre değişir; siparişte net tarihi bildiriyoruz.` },
+    { q: `${s.name} cam tablo teslimatı yapıyor musunuz?`, a: `Evet. ${s.name} ve ${nin(d.name)} tüm mahallelerine cam tablo teslimatı yapıyoruz. Her tablo sipariş üzerine üretilir ve genellikle 3–7 iş günü içinde kargoya verilir; kargo takip numarası size iletilir.` },
     { q: `${s.name} için hangi cam tablo modelleri uygun?`, a: s.note },
     ...camTabloFaq.slice(0, 4),
   ];
@@ -53,8 +52,8 @@ export default async function Page({ params }: { params: Params }) {
       <CamTabloHero
         eyebrow={`${d.name} · ${s.name}`}
         title={`${s.name} Cam Tablo`}
-        intro={`${s.name} cam tablo siparişleriniz için hazır modellerden seçim yapabilir ya da kendi fotoğrafınızla kişiye özel cam tablo yaptırabilirsiniz. Temperli cama UV baskı, askı aparatıyla ${s.name} adresinize teslim.`}
-        yer={s.name}
+        intro={`${s.name} cam tablo siparişleriniz için hazır modellerden seçim yapabilir ya da kendi fotoğrafınızla kişiye özel cam tablo yaptırabilirsiniz. 4 mm temperli cama UV baskı, gizli askı aparatıyla ${s.name} adresinize teslim.`}
+        campaign={`cam-tablo-${d.slug}-${s.slug}`}
         alt={`${s.name} (${d.name}) cam tablo: salon duvarına asılmış modern cam tablo`}
         breadcrumbs={<Breadcrumbs items={[{ name: "Cam Tablo", href: "/cam-tablo" }, { name: d.name, href: `/cam-tablo/${d.slug}` }, { name: s.name, href: path }]} />}
       />
@@ -64,7 +63,7 @@ export default async function Page({ params }: { params: Params }) {
         <p className="mt-3 max-w-3xl text-slate-600">{s.note}</p>
       </Container>
 
-      <CamTabloModels title={`${s.name} Cam Tablo Modelleri`} />
+      <CamTabloCollections title={`${s.name} Cam Tablo Modelleri`} place={`${s.name} ve çevresinde`} campaign={`cam-tablo-${d.slug}-${s.slug}`} />
       <CamTabloSizesAndRooms place={`${s.name} ve çevresinde`} />
       <CamTabloSteps />
       <CamTabloFaq title={`${s.name} Cam Tablo — Sık Sorulan Sorular`} faqs={faqs} />
@@ -88,7 +87,7 @@ export default async function Page({ params }: { params: Params }) {
           <Link href="/cam-tablo" className="font-medium text-brand-500 hover:underline">İstanbul Cam Tablo</Link>
         </p>
       </Container>
-      <ContactBanner />
+      <CamTabloCta campaign={`cam-tablo-${d.slug}-${s.slug}`} />
     </>
   );
 }

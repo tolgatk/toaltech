@@ -2,10 +2,11 @@
 
 import { usePathname } from "next/navigation";
 import FloatingButtons from "./FloatingButtons";
-import { isBareRoute } from "@/lib/routes";
+import { isBareRoute, isFocusedRoute } from "@/lib/routes";
 
 /** Kartvizit gibi tam ekran rotalarda yüzen butonlar gösterilmez. */
 export default function ConditionalFloatingButtons() {
-  if (isBareRoute(usePathname())) return null;
-  return <FloatingButtons />;
+  const pathname = usePathname();
+  if (isBareRoute(pathname)) return null;
+  return <FloatingButtons focused={isFocusedRoute(pathname)} />;
 }

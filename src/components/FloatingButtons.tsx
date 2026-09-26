@@ -5,19 +5,22 @@ import { site } from "@/lib/site";
 const base =
   "group flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg transition-transform hover:scale-110 focus:outline-none focus:ring-4";
 
-export default function FloatingButtons() {
+/** focused: cam tablo gibi ürün sayfalarında ajans Instagram'ı gizlenir, WhatsApp mesajı ürüne göre açılır */
+export default function FloatingButtons({ focused = false }: { focused?: boolean }) {
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
-      <a
-        href={site.instagram}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Instagram"
-        title="Instagram"
-        className={`${base} bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] focus:ring-pink-300`}
-      >
-        <InstagramIcon className="h-7 w-7" />
-      </a>
+      {!focused && (
+        <a
+          href={site.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          title="Instagram"
+          className={`${base} bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] focus:ring-pink-300`}
+        >
+          <InstagramIcon className="h-7 w-7" />
+        </a>
+      )}
       <a
         href={`tel:${site.phoneTel}`}
         aria-label="Telefonla Ara"
@@ -27,7 +30,7 @@ export default function FloatingButtons() {
         <Phone className="h-6 w-6" />
       </a>
       <a
-        href={site.whatsapp}
+        href={focused ? site.camTabloWhatsapp : site.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp"

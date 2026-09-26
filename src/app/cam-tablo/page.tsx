@@ -4,15 +4,15 @@ import { MapPin } from "lucide-react";
 import { Container } from "@/components/ui";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import ContactBanner from "@/components/ContactBanner";
-import { CamTabloFaq, CamTabloHero, CamTabloModels, CamTabloSizesAndRooms, CamTabloSteps } from "@/components/CamTablo";
+import { CamTabloFaq, CamTabloHero, CamTabloCollections, CamTabloCta, CamTabloSizesAndRooms, CamTabloSteps } from "@/components/CamTablo";
 import { districts, getDistrict } from "@/lib/districts";
+import { bolgeler, illerOf } from "@/lib/iller";
 import { camTabloFaq, camTabloIntro, semtler } from "@/lib/camTablo";
 import { camTabloGraph } from "@/lib/schema";
 import { abs } from "@/lib/seo";
 
-const title = "İstanbul Cam Tablo: Modelleri, Ölçüleri ve Fiyatları";
-const description = "İstanbul cam tablo: temperli cama UV baskı modern, 3'lü set, saatli ve kişiye özel fotoğraflı cam tablo modelleri. 39 ilçeye teslimat, ölçü ve fiyat için WhatsApp'tan yazın.";
+const title = "Cam Tablo: İstanbul ve 81 İle Teslimat, Modeller ve Fiyatlar";
+const description = "İstanbul cam tablo: 4 mm temperli cama UV baskı, 1.800+ tasarım ve kişiye özel fotoğraflı cam tablo. 35×50 cm 1.200 ₺'den başlayan fiyatlar. İstanbul'un 39 ilçesine ve Türkiye'nin 81 iline teslimat.";
 
 export const metadata: Metadata = {
   title,
@@ -32,9 +32,10 @@ export default function Page() {
     <>
       <JsonLd data={camTabloGraph("/cam-tablo", "İstanbul Cam Tablo", description, { name: "İstanbul", type: "City" })} />
       <CamTabloHero
-        eyebrow="İstanbul · 39 İlçe"
+        eyebrow="İstanbul · 39 İlçe · 81 İl"
         title="İstanbul Cam Tablo"
         intro={camTabloIntro}
+        campaign="cam-tablo"
         alt="İstanbul cam tablo: modern salon duvarında büyük ölçülü, parlak yüzeyli cam tablo"
         breadcrumbs={<Breadcrumbs items={[{ name: "Cam Tablo", href: "/cam-tablo" }]} />}
       />
@@ -48,13 +49,13 @@ export default function Page() {
         </div>
       </Container>
 
-      <CamTabloModels title="Cam Tablo Modelleri" />
+      <CamTabloCollections title="Cam Tablo Modelleri ve Koleksiyonları" place="İstanbul'da" campaign="cam-tablo" />
       <CamTabloSizesAndRooms place="İstanbul'da" />
       <CamTabloSteps />
       <CamTabloFaq title="Cam Tablo Hakkında Sık Sorulan Sorular" faqs={camTabloFaq} />
 
       <Container className="py-8">
-        <h2 className="text-2xl font-bold text-navy">İlçelere Göre Cam Tablo</h2>
+        <h2 id="ilceler" className="scroll-mt-24 text-2xl font-bold text-navy">İstanbul İlçelerine Göre Cam Tablo</h2>
         <p className="mt-2 text-slate-600">İstanbul&apos;un 39 ilçesine cam tablo teslimatı yapıyoruz. İlçenize özel model önerileri ve teslimat bilgisi için ilçenizi seçin.</p>
         {groups.map((g) => (
           <div key={g.label} className="mt-8">
@@ -73,6 +74,31 @@ export default function Page() {
       </Container>
 
       <Container className="py-8">
+        <h2 id="iller" className="scroll-mt-24 text-2xl font-bold text-navy">Türkiye Geneli Cam Tablo</h2>
+        <p className="mt-2 max-w-3xl text-slate-600">Tablolar İstanbul&apos;da üretilir ve Türkiye&apos;nin 81 iline kargoyla gönderilir. İlinize özel teslim süresi ve model önerileri için ilinizi seçin.</p>
+        {bolgeler.map((b) => {
+          const list = illerOf(b);
+          return (
+            <div key={b} className="mt-8">
+              <h3 className="font-semibold text-slate-800">{b} Bölgesi Cam Tablo</h3>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {b === "Marmara" && (
+                  <li>
+                    <a href="#ilceler" className="inline-flex min-h-11 items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-brand-500 hover:text-brand-500">İstanbul Cam Tablo</a>
+                  </li>
+                )}
+                {list.map((i) => (
+                  <li key={i.slug}>
+                    <Link href={`/cam-tablo/${i.slug}`} className="inline-flex min-h-11 items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-brand-500 hover:text-brand-500">{i.name} Cam Tablo</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </Container>
+
+      <Container className="py-8">
         <h2 className="text-2xl font-bold text-navy">Semtlere Göre Cam Tablo</h2>
         <ul className="mt-4 flex flex-wrap gap-2">
           {semtler.map((s) => (
@@ -84,7 +110,7 @@ export default function Page() {
           ))}
         </ul>
       </Container>
-      <ContactBanner />
+      <CamTabloCta campaign="cam-tablo" />
     </>
   );
 }
