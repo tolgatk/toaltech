@@ -1,6 +1,7 @@
 import { SITE_URL, abs } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { districts } from "@/lib/districts";
+import { reels, previewSrc, posterSrc } from "@/lib/portfolio";
 
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
@@ -152,3 +153,20 @@ export const camTabloGraph = (path: string, name: string, description: string, a
     },
   ],
 });
+
+/** Gerçek müşteri videoları: video sonuçlarında görünmek için VideoObject düğümleri */
+export const reelVideoNodes = (slugs?: string[]) =>
+  reels
+    .filter((r) => !slugs || slugs.includes(r.slug))
+    .map((r) => ({
+      "@type": "VideoObject",
+      "@id": `${abs(previewSrc(r.slug))}#video`,
+      name: `${r.brand} — ${r.title}`,
+      description: r.description,
+      thumbnailUrl: abs(posterSrc(r.slug)),
+      contentUrl: abs(previewSrc(r.slug)),
+      uploadDate: `${r.uploadDate}T12:00:00+03:00`,
+      duration: r.duration,
+      inLanguage: "tr-TR",
+      creator: { "@id": ORG_ID },
+    }));

@@ -40,3 +40,60 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .marquee { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; }
 }
+
+/* ---- Video vitrini ---- */
+.reel-track-wrap {
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.reel-track {
+  animation: marquee 50s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel-track-wrap { overflow-x: auto; scroll-snap-type: x mandatory; mask-image: none; }
+  .reel-track { animation: none; padding-inline: 1rem; }
+  .reel-track > * { scroll-snap-align: start; }
+  .reel-dup { display: none; }
+}
+
+/* Referans markalar: yavaş kayan isim şeridi */
+.client-track-wrap {
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.client-track { animation: marquee 80s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .client-track { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; row-gap: 1rem; }
+  .client-track > [aria-hidden="true"] { display: none; }
+}
+
+@keyframes phone-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+.phone-float-a { animation: phone-float 6s ease-in-out infinite; }
+.phone-float-b { animation: phone-float 7s ease-in-out -2s infinite; }
+.phone-float-c { animation: phone-float 6.5s ease-in-out -4s infinite; }
+
+/* Ekrana girince beliren bloklar; JS kapalıysa içerik görünür kalır */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    translate: 0 28px;
+    transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), translate 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reveal.is-visible { opacity: 1; translate: 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phone-float-a, .phone-float-b, .phone-float-c { animation: none; }
+}
+
+
+/* İletişim popup'ı: mobilde alttan kayar, masaüstünde ortada belirir */
+.contact-popup[open] { animation: popup-in 0.35s cubic-bezier(0.2, 0.7, 0.2, 1); }
+@keyframes popup-in {
+  from { opacity: 0; transform: translateY(24px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-popup[open] { animation: none; }
+}

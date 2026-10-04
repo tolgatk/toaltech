@@ -10,10 +10,15 @@ import { WhatsAppIcon } from "@/components/Icons";
 import { localServices, getLocalService } from "@/lib/localServices";
 import { districts, getDistrict } from "@/lib/districts";
 import { localFaq, localNote, matchedSectors } from "@/lib/localContent";
-import { de, nin } from "@/lib/tr";
+import { de, deki, nin } from "@/lib/tr";
 import { serviceDistrictGraph } from "@/lib/schema";
 import { abs } from "@/lib/seo";
 import { site } from "@/lib/site";
+import ReelsMarquee from "@/components/showcase/ReelsMarquee";
+import ContactPopup from "@/components/ContactPopup";
+
+/** Gerçek video işlerinin gösterildiği hizmetler */
+const SHOWS_REELS = new Set(["sosyal-medya-danismanligi", "sosyal-medya-yonetimi", "reklam-danismanligi", "cafe-sosyal-medya-danismanligi", "restoran-sosyal-medya-danismanligi"]);
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -62,6 +67,13 @@ export default async function Page({ params }: { params: Params }) {
           </div>
         </Container>
       </section>
+
+      {SHOWS_REELS.has(s.slug) && (
+        <ReelsMarquee
+          title="İstanbul'daki müşterilerimiz için ürettiklerimiz"
+          desc={`${deki(d.name)} işletmeniz için de aynı ekip çekiyor, kurguluyor ve yayınlıyor.`}
+        />
+      )}
 
       <Container className="py-12">
         <div className="grid gap-8 lg:grid-cols-3">
@@ -153,6 +165,7 @@ export default async function Page({ params }: { params: Params }) {
         </p>
       </Container>
       <ContactBanner />
+      {SHOWS_REELS.has(s.slug) && <ContactPopup service={s.name} />}
     </>
   );
 }

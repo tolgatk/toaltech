@@ -8,7 +8,12 @@ import JsonLd from "@/components/JsonLd";
 import ContactBanner from "@/components/ContactBanner";
 import { localServices, getLocalService } from "@/lib/localServices";
 import { districts } from "@/lib/districts";
-import { serviceHubGraph } from "@/lib/schema";
+import { serviceHubGraph, reelVideoNodes } from "@/lib/schema";
+import SocialServiceShowcase from "@/components/showcase/SocialServiceShowcase";
+import ContactPopup from "@/components/ContactPopup";
+
+/** Gerçek video işleriyle zenginleştirilmiş vitrin düzenini kullanan hizmetler */
+const SHOWCASE = new Set(["sosyal-medya-danismanligi", "sosyal-medya-yonetimi"]);
 import { abs } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -40,45 +45,52 @@ export default async function Page({ params }: { params: Promise<{ hizmet: strin
     { label: "Anadolu Yakası", list: byTier.filter((d) => d.side === "Anadolu") },
   ];
 
+  const showcase = SHOWCASE.has(s.slug);
+  const graph = serviceHubGraph(s);
+
   return (
     <>
-      <JsonLd data={serviceHubGraph(s)} />
-      <section className="bg-gradient-to-b from-brand-50 to-white">
-        <Container className="py-14">
-          <Breadcrumbs items={[{ name: s.name, href: `/${s.slug}` }]} />
-          <p className="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-brand-500">İstanbul · 39 İlçe</p>
-          <h1 className="mt-2 text-4xl font-extrabold text-navy sm:text-5xl">İstanbul {s.name}</h1>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">{s.intro}</p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <ButtonLink href={site.whatsapp} external>WhatsApp&apos;tan Teklif Al</ButtonLink>
-            <ButtonLink href="/iletisim" variant="ghost">Ücretsiz İlk Görüşme</ButtonLink>
-          </div>
-        </Container>
-      </section>
+      <JsonLd data={showcase ? { ...graph, "@graph": [...graph["@graph"], ...reelVideoNodes()] } : graph} />
+      {showcase ? <SocialServiceShowcase s={s} /> : (
+        <>
+          <section className="bg-gradient-to-b from-brand-50 to-white">
+            <Container className="py-14">
+              <Breadcrumbs items={[{ name: s.name, href: `/${s.slug}` }]} />
+              <p className="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-brand-500">İstanbul · 39 İlçe</p>
+              <h1 className="mt-2 text-4xl font-extrabold text-navy sm:text-5xl">İstanbul {s.name}</h1>
+              <p className="mt-4 max-w-2xl text-lg text-slate-600">{s.intro}</p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <ButtonLink href={site.whatsapp} external>WhatsApp&apos;tan Teklif Al</ButtonLink>
+                <ButtonLink href="/iletisim" variant="ghost">Ücretsiz İlk Görüşme</ButtonLink>
+              </div>
+            </Container>
+          </section>
 
-      <Container className="grid gap-10 py-12 lg:grid-cols-2">
-        <div>
-          <h2 className="text-2xl font-bold text-navy">{s.name} Kapsamında Neler Var?</h2>
-          <ul className="mt-5 space-y-3">
-            {s.benefits.map((b) => (
-              <li key={b} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 text-slate-700">
-                <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand-500" /> {b}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-2xl font-bold text-navy">Nasıl Çalışıyoruz?</h2>
-          <ol className="mt-5 space-y-3">
-            {s.steps.map((st, i) => (
-              <li key={st} className="flex items-center gap-4 rounded-xl bg-slate-50 p-4">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-500 font-bold text-white">{i + 1}</span>
-                <span className="font-medium text-slate-700">{st}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </Container>
+          <Container className="grid gap-10 py-12 lg:grid-cols-2">
+            <div>
+              <h2 className="text-2xl font-bold text-navy">{s.name} Kapsamında Neler Var?</h2>
+              <ul className="mt-5 space-y-3">
+                {s.benefits.map((b) => (
+                  <li key={b} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 text-slate-700">
+                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand-500" /> {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-navy">Nasıl Çalışıyoruz?</h2>
+              <ol className="mt-5 space-y-3">
+                {s.steps.map((st, i) => (
+                  <li key={st} className="flex items-center gap-4 rounded-xl bg-slate-50 p-4">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-500 font-bold text-white">{i + 1}</span>
+                    <span className="font-medium text-slate-700">{st}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </Container>
+        </>
+      )}
 
       <Container className="py-8">
         <h2 className="text-2xl font-bold text-navy">Sık Sorulan Sorular</h2>
@@ -122,6 +134,7 @@ export default async function Page({ params }: { params: Promise<{ hizmet: strin
         </ul>
       </Container>
       <ContactBanner />
+      {showcase && <ContactPopup service={s.name} />}
     </>
   );
 }
