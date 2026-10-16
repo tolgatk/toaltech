@@ -19,18 +19,25 @@ export const camTabloImage = {
 export const camTabloIntro =
   "Cam tablo, görselin 4 mm temperli camın arka yüzüne UV baskıyla işlendiği, çerçevesiz ve parlak yüzeyli modern bir duvar dekorasyonudur. Renkleri kanvasa göre daha canlı durur, solmaz, nemden etkilenmez ve nemli bezle silinerek temizlenir; salon, yatak odası, mutfak, antre ve ofis duvarlarına uygundur.";
 
-/** tobecreative.net ana koleksiyonları; görseller public/cam-tablo/koleksiyon/ altında */
+/** tobecreative.net ana koleksiyonları, sitedeki menü sırasıyla (Ekim 2026); görseller public/cam-tablo/koleksiyon/ altında */
 export const camTabloCollections = [
-  { slug: "pop-art-para", name: "Pop Art & Para", desc: "Lüks markalar, ikonik karakterler ve para temalı cesur kolajlar." },
-  { slug: "soyut-altin", name: "Soyut & Altın", desc: "Akışkan formlar, altın ve mermer dokulu üç boyutlu soyut kompozisyonlar." },
-  { slug: "otomobil", name: "Otomobil", desc: "Klasik ve modern otomobillerin stüdyo kalitesinde cam tabloları." },
-  { slug: "formula-1", name: "Formula 1", desc: "Pist, pilot ve araç temalı F1 posterleri ve panoramikler." },
-  { slug: "hayvanlar-vahsi-doga", name: "Hayvanlar & Vahşi Doğa", desc: "Aslan, kaplan, kurt ve kuşlarla güçlü portreler." },
-  { slug: "sinema-anime", name: "Sinema & Anime", desc: "Süper kahramanlar, Star Wars, anime ve kült karakterler." },
-  { slug: "klasik-eserler", name: "Klasik Eserler", desc: "Klasik tablolara modern, beklenmedik dokunuşlar." },
-  { slug: "spor", name: "Spor", desc: "Futbol, NBA efsaneleri, sneaker ve ikonik anlar." },
-  { slug: "panoramik", name: "Panoramik", desc: "Geniş duvarlar için yatay formatlı manzara ve şehir sahneleri." },
-  { slug: "yasam-dekor", name: "Yaşam & Dekor", desc: "Parfüm, müzik, motivasyon yazıları ve estetik posterler." },
+  { slug: "ataturk-koleksiyonu", name: "Atatürk Koleksiyonu", desc: "Mustafa Kemal Atatürk portreleriyle salon ve ofis duvarlarına anlamlı cam tablolar." },
+  { slug: "klasik-eserler", name: "Klasik & Ünlü Tablolar", desc: "Rönesans, izlenimcilik, Japon sanatı ve modern akımlardan ünlü eserler." },
+  { slug: "soyut-altin", name: "Soyut & Modern", desc: "Boho, renkli soyut, çizgi sanatı, Bauhaus ve altın-mermer kompozisyonlar." },
+  { slug: "cicek-botanik", name: "Çiçek & Botanik", desc: "Çiçekler, yaprak desenleri ve suluboya botanik çizimler." },
+  { slug: "doga-manzara", name: "Doğa & Manzara", desc: "Deniz, sahil, dağ, orman ve geniş duvarlar için panoramik manzaralar." },
+  { slug: "yasam-dekor", name: "Estetik & Trend", desc: "Estetik posterler, coquette, figür, motivasyon yazıları ve moda temaları." },
+  { slug: "mutfak", name: "Mutfak & Yeme İçme", desc: "Mutfak posterleri, meyve-sebze ve kahve-içecek temalı tasarımlar." },
+  { slug: "sehir-seyahat", name: "Şehir & Seyahat", desc: "Seyahat posterleri, New York ve dünya şehirlerinden mimari sahneler." },
+  { slug: "vintage-retro", name: "Vintage & Retro", desc: "Vintage posterler, 70'ler-80'ler retro ve antika bilimsel çizimler." },
+  { slug: "mevsimler", name: "Yılbaşı & Mevsimler", desc: "Yılbaşı, ilkbahar-yaz, kış ve sonbahar temalı mevsimlik tablolar." },
+  { slug: "hayvanlar-vahsi-doga", name: "Hayvanlar & Vahşi Doğa", desc: "Aslan, kaplan, kuşlar, kelebekler, kedi ve köpeklerle güçlü portreler." },
+  { slug: "cocuk-odasi", name: "Çocuk Odası", desc: "Sevimli hayvan posterleri, alfabe ve eğitici çocuk odası tasarımları." },
+  { slug: "pop-art-para", name: "Pop Art & Para", desc: "Pop art karakterler, ikonlar ve para-dolar temalı cesur kolajlar." },
+  { slug: "sinema-anime", name: "Sinema & Anime", desc: "Anime, Marvel & DC, Star Wars, çizgi film ve kült film-diziler." },
+  { slug: "otomobil", name: "Otomobil & Motosiklet", desc: "Klasik, süper ve panoramik otomobiller ile motosiklet tasarımları." },
+  { slug: "formula-1", name: "Formula 1", desc: "F1 posterleri, panoramik pist sahneleri ve kask koleksiyonu." },
+  { slug: "spor", name: "Spor", desc: "Futbol, basketbol & NBA, sneaker, golf ve tenis temaları." },
   { slug: "fantastik-uzay", name: "Fantastik & Uzay", desc: "Astronot, gezegen, neon ve fantastik dünyalar." },
 ].map((c) => ({ ...c, img: `/cam-tablo/koleksiyon/${c.slug}-cam-tablo.webp`, href: `/koleksiyon/${c.slug}` }));
 
