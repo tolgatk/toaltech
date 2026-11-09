@@ -7,7 +7,7 @@ import SeoCallout from "@/components/SeoCallout";
 import JsonLd from "@/components/JsonLd";
 import { homeGraph, reelVideoNodes } from "@/lib/schema";
 import PhoneStack from "@/components/showcase/PhoneStack";
-import ReelsMarquee from "@/components/showcase/ReelsMarquee";
+import WorkShowcase from "@/components/showcase/WorkShowcase";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -60,19 +60,14 @@ export default function Home() {
         </div>
 
         {/* Gerçek müşteri videoları */}
-        <PhoneStack slugs={["capsule-bar-reels", "atak-reklam-filmi", "atalar-speedramp"]} className="max-w-[420px] sm:max-w-[520px] lg:max-w-[560px]" />
+        <PhoneStack slugs={["capsule-bar-reels", "efendy-yaz-sezonu", "atalar-speedramp"]} className="max-w-[420px] sm:max-w-[520px] lg:max-w-[560px]" />
       </div>
     </section>
     <ClientMarquee />
     <SeoCallout compact />
     </div>
 
-    <ReelsMarquee
-      eyebrow="Öne Çıkan İşler"
-      title="Strateji, çekim, reklam: hepsi tek ekipte"
-      desc="Markaların sosyal medyasını nasıl kurduğumuzu, hangi kampanyaları yürüttüğümüzü kendi videolarıyla anlatıyoruz."
-     
-    />
+    <WorkShowcase />
     </>
   );
 }

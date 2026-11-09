@@ -13,7 +13,28 @@ export type Reel = {
   instagram?: string;
 };
 
-export const reels: Reel[] = [
+const efendy = (slug: string, title: string, kind: string, description: string, uploadDate: string): Reel => ({
+  slug,
+  brand: "Efendy Bungalow",
+  title,
+  kind,
+  description,
+  uploadDate,
+  duration: "PT10S",
+});
+
+const efendyReels: Reel[] = [
+  efendy("efendy-isitmali-havuz", "Isıtmalı havuz sonbahar reels'i", "Reels", "Silivri Gümüşyaka'daki Efendy Bungalow için ısıtmalı havuz ve jakuzinin sonbaharda da açık olduğunu anlatan müzikli reels.", "2026-10-14"),
+  efendy("efendy-fpv-drone", "FPV drone efektli tanıtım", "Drone Reels", "Efendy Bungalow'u FPV drone çekimi ve görsel efektlerle gezdiren dikkat çekici reels.", "2026-10-13"),
+  efendy("efendy-buraya-kiminle", "“Buraya kiminle gelmek istersin?” reels'i", "Etkileşim Reels", "Takipçiyi etiketlemeye davet eden, bungalov ve havuz çekimleriyle kurgulanmış etkileşim odaklı reels.", "2026-10-17"),
+  efendy("efendy-yaz-sezonu", "Yaz sezonu kapanış videosu", "Reels", "Havuz başında kahvaltı, yüzen meyve tepsisi ve gün batımıyla Efendy Bungalow'da geçen yazı özetleyen reels.", "2026-10-13"),
+  efendy("efendy-havuz-sezonu", "Isıtmalı havuz kuşbakışı story", "Story", "Gece kuşbakışı çekimle bungalovların ısıtmalı havuzlarını gösteren sezon duyurusu story'si.", "2026-10-15"),
+  efendy("efendy-gunden-geceye", "Günden geceye bungalov story'si", "Story", "Efendy Bungalow'un iç mekânını ve havuz manzarasını gündüzden geceye geçişle anlatan story videosu.", "2026-10-14"),
+  efendy("efendy-hafta-sonu", "Hafta sonu kaçamağı reels'i", "Reels", "Bungalovun kapısından içeri giren bakış açısıyla hafta sonu rezervasyonuna çağıran reels.", "2026-10-19"),
+  efendy("efendy-havalar-sogumadan", "“Havalar soğumadan” story'si", "Story", "Havalar soğumadan son havuz günleri için rezervasyona çağıran Efendy Bungalow story videosu.", "2026-10-21"),
+];
+
+const clientReels: Reel[] = [
   {
     slug: "atak-reklam-filmi",
     brand: "Atak Fen Bilimleri",
@@ -118,6 +139,11 @@ export const reels: Reel[] = [
     duration: "PT5S",
   },
 ];
+
+/** Kayan şeritte marka çeşitliliği için Efendy videoları diğer işlerin arasına serpiştirilir. */
+export const reels: Reel[] = clientReels.flatMap((r, i) =>
+  i < efendyReels.length ? [r, efendyReels[i]] : [r],
+);
 
 export const getReel = (slug: string) => reels.find((r) => r.slug === slug);
 export const previewSrc = (slug: string) => `/videos/${slug}.mp4`;

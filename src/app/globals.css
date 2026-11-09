@@ -46,9 +46,16 @@ body {
   mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
 }
 .reel-track {
-  animation: marquee 50s linear infinite;
+  animation: marquee 86s linear infinite; /* 19 kart; eski hız (11 kart / 50s) korunur */
   will-change: transform;
 }
+/* Örnek profil vitrini: seçili sektör düğmesindeki ilerleme çizgisi */
+@keyframes profile-progress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+.profile-progress { animation: profile-progress linear forwards; }
+
 @media (prefers-reduced-motion: reduce) {
   .reel-track-wrap { overflow-x: auto; scroll-snap-type: x mandatory; mask-image: none; }
   .reel-track { animation: none; padding-inline: 1rem; }

@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 import type { LocalService } from "@/lib/localServices";
 import PhoneStack from "./PhoneStack";
 import ReelCard from "./ReelCard";
-import ReelsMarquee from "./ReelsMarquee";
+import WorkShowcase from "./WorkShowcase";
 import Reveal from "./Reveal";
 
 const benefitIcons: LucideIcon[] = [Compass, CalendarDays, Clapperboard, Users, SearchCheck, BarChart3];
@@ -60,16 +60,12 @@ export default function SocialServiceShowcase({ s }: { s: LocalService }) {
               ))}
             </dl>
           </div>
-          <PhoneStack slugs={["capsule-acilis-teaser", "atak-reklam-filmi", "atalar-davet-tanitim"]} className="max-w-[420px] sm:max-w-[540px]" />
+          <PhoneStack slugs={["capsule-acilis-teaser", "efendy-yaz-sezonu", "atalar-davet-tanitim"]} className="max-w-[420px] sm:max-w-[540px]" />
         </div>
       </section>
 
       {/* VİDEO ŞERİDİ */}
-      <ReelsMarquee
-        eyebrow="Ürettiğimiz İçerikler"
-        title="Reels, reklam filmi, tanıtım: hepsi bizden"
-        desc="Senaryo, çekim, kurgu, altyazı ve yayın. Aşağıdaki videolar eğitim kurumlarından kafelere, davet salonlarından ürün markalarına kadar İstanbul'daki müşterilerimiz için üretildi."
-      />
+      <WorkShowcase />
 
       {/* KAPSAM */}
       <section aria-labelledby="kapsam" className="py-16 sm:py-20">
@@ -137,8 +133,8 @@ export default function SocialServiceShowcase({ s }: { s: LocalService }) {
             </Link>
           </div>
           <Reveal className="mx-auto w-full max-w-[300px]">
-            <ReelCard slug="atak-reklam-filmi" />
-            <p className="mt-3 text-center text-sm text-blue-200">Kampanya kreatifi: kayıt dönemi reklam filmi</p>
+            <ReelCard slug="efendy-yaz-sezonu" />
+            <p className="mt-3 text-center text-sm text-blue-200">Efendy Bungalow: yaz sezonu reels&apos;i</p>
           </Reveal>
         </div>
       </section>
