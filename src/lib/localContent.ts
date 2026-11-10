@@ -1,5 +1,6 @@
 import type { District } from "./districts";
 import type { LocalService } from "./localServices";
+import type { ServiceContent } from "./serviceContent";
 import { de, deki, nin } from "./tr";
 
 const norm = (s: string) => s.toLocaleLowerCase("tr");
@@ -33,9 +34,22 @@ export function localFaq(s: LocalService, d: District) {
     faqs.push({
       q: `${de(d.name)} drone uçuşu serbest mi?`,
       a: risky
-        ? `${d.name}, havalimanı/askeri tesis yakınlığı nedeniyle kısıtlı uçuş bölgeleri içerebilir. Çekim noktasını paylaşırsanız uçuşa uygunluğu ve izin gerekliliğini önceden kontrol edip planı ona göre yapıyoruz.`
-        : `${nin(d.name)} büyük bölümünde izin süreci tamamlanarak çekim yapılabilir; Boğaz hattı, kamu binaları ve kalabalık alanlar gibi noktalar için ek izin gerekebilir. Lokasyonu önceden kontrol ediyoruz.`,
+        ? `${d.name}, havalimanı/askeri tesis yakınlığı nedeniyle kısıtlı uçuş bölgeleri içerebilir. Çekim noktasını paylaşırsanız uygunluğa önceden bakıp planı ona göre yapıyoruz.`
+        : `${nin(d.name)} birçok noktasında çekim planlanabilir; Boğaz hattı, kamu binaları ve kalabalık alanlar gibi yerlerde izin gerekebilir. Lokasyona çekimden önce birlikte bakıyoruz.`,
     });
   }
   return faqs;
+}
+
+/**
+ * Kullanım alanlarını ilçenin sektörlerine göre sıralar: ilçeyle en ilgili dört alan öne gelir.
+ * Böylece her ilçe sayfası aynı listeyi değil, kendi iş dokusuna uyanları gösterir.
+ */
+export function localUseCases(c: ServiceContent, d: District) {
+  const words = d.sectors.flatMap((x) => norm(x).split(/[\s&,]+/)).filter((w) => w.length > 3);
+  const scored = c.useCases.map((u, i) => {
+    const text = norm(`${u.title} ${u.text}`);
+    return { u, i, score: words.filter((w) => text.includes(w.slice(0, 5))).length };
+  });
+  return scored.sort((a, b) => b.score - a.score || a.i - b.i).slice(0, 4).map((x) => x.u);
 }

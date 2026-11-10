@@ -1,0 +1,38 @@
+# ToalTech
+
+> ToalTech, İstanbul merkezli bir dijital ajanstır. İstanbul'un Avrupa ve Anadolu Yakası'ndaki işletmelere sosyal medya yönetimi, drone ve ürün çekimi, web tasarım, yazılım danışmanlığı, SEO ve reklam danışmanlığı verir. Çekim, kurgu, tasarım, yazılım ve reklam aynı ekipte yürütülür.
+
+İletişim: 0535 515 22 37 (telefon ve WhatsApp), info@toaltech.com, Instagram @toaltechcom. Çalışma saatleri hafta içi 09:00 - 19:00. İlk görüşme ücretsizdir; fiyat, işin kapsamına göre yazılı teklif olarak verilir.
+
+## Hizmetler
+
+- [İstanbul Drone Çekimi](https://toaltech.com/drone-cekimi): Emlak, inşaat, tesis, otel, mekân ve etkinlik için 4K havadan video ve fotoğraf; lokasyon ön kontrolü ve kurgu dahil.
+- [İstanbul Sosyal Medya Yönetimi](https://toaltech.com/sosyal-medya-yonetimi): İçerik planı, yerinde çekim, Reels kurgusu, paylaşım, yorum takibi ve aylık rapor.
+- [İstanbul Sosyal Medya Danışmanlığı](https://toaltech.com/sosyal-medya-danismanligi): Hesap denetimi, strateji, içerik takvimi ve ekip eğitimi.
+- [İstanbul Yazılım Danışmanlığı](https://toaltech.com/yazilim-danismanligi): İhtiyaç analizi, hazır ya da özel yazılım kararı, teklif karşılaştırma, web ve özel yazılım geliştirme.
+- [İstanbul Web Tasarım](https://toaltech.com/web-tasarim): Kurumsal site, e-ticaret ve landing page.
+- [SEO ve Yapay Zeka Optimizasyonu](https://toaltech.com/seo-hizmeti): Teknik SEO, yerel SEO ve yapay zeka aramalarına uygun içerik.
+- [İstanbul Reklam Danışmanlığı](https://toaltech.com/reklam-danismanligi): Meta (Instagram, Facebook) ve Google Ads yönetimi.
+- [İstanbul Ürün Çekimi](https://toaltech.com/urun-cekimi): E-ticaret, katalog ve sosyal medya için ürün fotoğrafı ve videosu.
+- [Cafe Sosyal Medya Danışmanlığı](https://toaltech.com/cafe-sosyal-medya-danismanligi)
+- [Restoran Sosyal Medya Danışmanlığı](https://toaltech.com/restoran-sosyal-medya-danismanligi)
+
+Her hizmetin İstanbul'un 39 ilçesi için ayrı sayfası vardır; adres yapısı https://toaltech.com/{hizmet}/{ilce} şeklindedir (örnek: https://toaltech.com/drone-cekimi/kadikoy).
+
+## Rehberler
+
+- [Drone Çekimi Fiyatları 2026](https://toaltech.com/blog/drone-cekimi-fiyatlari-2026)
+- [Drone Çekimi İzni: 2026 Kuralları](https://toaltech.com/blog/drone-cekimi-izni-nasil-alinir): P0, P1, P2 lisansları, M0-M3 sınıfları, yeşil ve kırmızı bölgeler.
+- [Yazılım Danışmanlığı Nedir?](https://toaltech.com/blog/yazilim-danismanligi-nedir)
+- [Sosyal Medya Danışmanlığı Nedir?](https://toaltech.com/blog/sosyal-medya-danismanligi-nedir)
+- [Sosyal Medya Yönetimi Fiyatları 2026](https://toaltech.com/blog/sosyal-medya-yonetimi-fiyatlari-2026)
+- [Instagram Reklam Bütçesi Ne Kadar Olmalı?](https://toaltech.com/blog/instagram-reklam-butcesi-ne-kadar-olmali)
+- [Restoran Sosyal Medya Yönetimi Nasıl Yapılır?](https://toaltech.com/blog/restoran-sosyal-medya-yonetimi-nasil-yapilir)
+
+## Kurumsal
+
+- [Hizmetlerimiz](https://toaltech.com/hizmetlerimiz)
+- [Paketlerimiz](https://toaltech.com/paketlerimiz)
+- [Referanslar](https://toaltech.com/referanslar)
+- [Hakkımızda](https://toaltech.com/hakkimizda)
+- [İletişim](https://toaltech.com/iletisim)

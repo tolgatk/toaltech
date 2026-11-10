@@ -145,6 +145,24 @@ export const reels: Reel[] = clientReels.flatMap((r, i) =>
   i < efendyReels.length ? [r, efendyReels[i]] : [r],
 );
 
-export const getReel = (slug: string) => reels.find((r) => r.slug === slug);
+/**
+ * Drone çekimi sayfalarındaki havadan çekimler. Firma adı geçmez:
+ * `brand` alanı kartta başlık olarak görünen çekim türüdür.
+ */
+const drone = (slug: string, brand: string, title: string, description: string): Reel => ({
+  slug, brand, title, kind: "Drone Çekimi", description, uploadDate: "2026-09-13", duration: "PT10S",
+});
+
+export const droneReels: Reel[] = [
+  drone("drone-gece", "Gece Çekimi", "Işıklı havuz ve bungalov", "Işıklı havuzları ve bungalovlarıyla bir tatil tesisinin gece havadan drone çekimi."),
+  drone("drone-mekan", "Mekân Tanıtımı", "Giriş ve cephe", "Bir kafe-restoranın girişini ve cephesini havadan tanıtan drone çekimi."),
+  drone("drone-fpv", "FPV Drone", "İç ve dış mekân geçişi", "Bir tatil tesisini içeriden dışarıya kesintisiz gezdiren FPV drone çekimi."),
+  drone("drone-gunduz", "Gündüz Çekimi", "Havuzlu bungalov", "Havuzlu bir bungalova gündüz ışığında yaklaşan drone çekimi."),
+  drone("drone-gunbatimi", "Gün Batımı", "Tesisin tamamı", "Gün batımında bir tatil tesisinin tamamını yüksekten gösteren drone çekimi."),
+  drone("drone-kusbakisi", "Kuşbakışı", "Gece havuz manzarası", "Bungalovların ısıtmalı havuzlarını gece tam tepeden gösteren kuşbakışı drone çekimi."),
+];
+
+const allReels = [...reels, ...droneReels];
+export const getReel = (slug: string) => allReels.find((r) => r.slug === slug);
 export const previewSrc = (slug: string) => `/videos/${slug}.mp4`;
 export const posterSrc = (slug: string) => `/videos/${slug}.webp`;

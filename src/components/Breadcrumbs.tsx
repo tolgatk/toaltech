@@ -4,19 +4,19 @@ import { abs } from "@/lib/seo";
 
 export type Crumb = { name: string; href: string };
 
-export default function Breadcrumbs({ items }: { items: Crumb[] }) {
+export default function Breadcrumbs({ items, dark = false }: { items: Crumb[]; dark?: boolean }) {
   const all: Crumb[] = [{ name: "Ana Sayfa", href: "/" }, ...items];
   return (
     <>
-      <nav aria-label="Breadcrumb" className="text-sm text-slate-500">
+      <nav aria-label="Breadcrumb" className={`text-sm ${dark ? "text-blue-200/70" : "text-slate-500"}`}>
         <ol className="flex flex-wrap items-center gap-1">
           {all.map((c, i) => (
             <li key={c.href} className="flex items-center gap-1">
               {i > 0 && <span aria-hidden>/</span>}
               {i === all.length - 1 ? (
-                <span aria-current="page" className="text-slate-700">{c.name}</span>
+                <span aria-current="page" className={dark ? "text-white" : "text-slate-700"}>{c.name}</span>
               ) : (
-                <Link href={c.href} className="hover:text-brand-500">{c.name}</Link>
+                <Link href={c.href} className={dark ? "hover:text-white" : "hover:text-brand-500"}>{c.name}</Link>
               )}
             </li>
           ))}

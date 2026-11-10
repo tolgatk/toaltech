@@ -11,9 +11,11 @@ const inter = Inter({ subsets: ["latin", "latin-ext"], variable: "--font-inter",
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "ToalTech | İstanbul Web Tasarım & Sosyal Medya Yönetimi", template: "%s | ToalTech" },
+  title: { default: "ToalTech | İstanbul Sosyal Medya, Drone Çekimi, Web ve Yazılım", template: "%s | ToalTech" },
   description:
-    "İstanbul'da web tasarım, sosyal medya yönetimi, Meta & Google reklam danışmanlığı, ürün ve drone çekimi. 39 ilçede yerinde hizmet, ücretsiz ilk görüşme.",
+    "İstanbul'da sosyal medya yönetimi, drone çekimi, web tasarım, yazılım danışmanlığı ve reklam. Çekim, yazılım ve reklam tek ekipte; ücretsiz ilk görüşme.",
+  applicationName: "ToalTech",
+  authors: [{ name: "ToalTech", url: SITE_URL }],
   openGraph: { siteName: "ToalTech", locale: "tr_TR", type: "website" },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },

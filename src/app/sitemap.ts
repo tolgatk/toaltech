@@ -17,6 +17,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...semtler.map((s) => ({ url: abs(`/cam-tablo/${s.ilce}/${s.slug}`), lastModified: new Date(CAM_TABLO_UPDATED) })),
     ...iller.map((i) => ({ url: abs(`/cam-tablo/${i.slug}`), lastModified: new Date(CAM_TABLO_UPDATED) })),
   ];
-  const blog = posts.map((p) => ({ url: abs(`/blog/${p.slug}`), lastModified: new Date(p.date) }));
+  const blog = posts.map((p) => ({ url: abs(`/blog/${p.slug}`), lastModified: new Date(p.updated ?? p.date) }));
   return [...statics, ...hubs, ...camTablo, ...blog, ...locals];
 }

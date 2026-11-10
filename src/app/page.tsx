@@ -5,7 +5,9 @@ import { services } from "@/lib/data";
 import ClientMarquee from "@/components/ClientMarquee";
 import SeoCallout from "@/components/SeoCallout";
 import JsonLd from "@/components/JsonLd";
-import { homeGraph, reelVideoNodes } from "@/lib/schema";
+import { faqNode, homeGraph, reelVideoNodes } from "@/lib/schema";
+import { HomeFaq, HomeGuides, HomeServices, HomeWhy, homeFaqs } from "@/components/HomeSections";
+import ContactBanner from "@/components/ContactBanner";
 import PhoneStack from "@/components/showcase/PhoneStack";
 import WorkShowcase from "@/components/showcase/WorkShowcase";
 import type { Metadata } from "next";
@@ -15,7 +17,7 @@ export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default function Home() {
   return (
     <>
-    <JsonLd data={{ ...homeGraph, "@graph": [...homeGraph["@graph"], ...reelVideoNodes()] }} />
+    <JsonLd data={{ ...homeGraph, "@graph": [...homeGraph["@graph"], faqNode("/", homeFaqs), ...reelVideoNodes()] }} />
     <div className="flex flex-col lg:h-[calc(100dvh-5rem)]">
     <section className="relative flex flex-1 overflow-hidden bg-gradient-to-b from-brand-50 via-white to-white py-12 sm:py-16 lg:py-0">
       <div className="bg-dots pointer-events-none absolute -left-10 top-10 h-64 w-64 opacity-40" />
@@ -31,8 +33,8 @@ export default function Home() {
             <span className="block text-brand-500">Sosyal Medya ile Daha Fazla Müşteri</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg text-slate-600">
-            Web tasarım, sosyal medya yönetimi ve reklam çözümlerimizle işinizi
-            büyütmeye odaklanın, dijitalde fark yaratın.
+            Sosyal medya yönetimi, drone çekimi, web tasarım, yazılım ve reklam:
+            çekimi yapan, siteyi yazan ve reklamı yöneten tek ekiple çalışın.
           </p>
 
           <ul className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -68,6 +70,11 @@ export default function Home() {
     </div>
 
     <WorkShowcase />
+    <HomeServices />
+    <HomeWhy />
+    <HomeFaq />
+    <HomeGuides />
+    <ContactBanner />
     </>
   );
 }

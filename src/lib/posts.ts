@@ -1,6 +1,8 @@
-export type Post = { slug: string; title: string; h1: string; description: string; date: string; hub: string; sections: { h2: string; p: string[] }[] };
+import { guidePosts } from "./postsGuides";
 
-export const posts: Post[] = [
+export type Post = { slug: string; title: string; h1: string; description: string; date: string; updated?: string; hub: string; sections: { h2: string; p: string[]; list?: string[] }[]; faq?: { q: string; a: string }[] };
+
+const basePosts: Post[] = [
   {
     slug: "sosyal-medya-yonetimi-fiyatlari-2026",
     title: "Sosyal Medya Yönetimi Fiyatları 2026: Aylık Kaç TL?",
@@ -32,21 +34,6 @@ export const posts: Post[] = [
     ],
   },
   {
-    slug: "drone-cekimi-izni-nasil-alinir",
-    title: "Drone Çekimi İzni Nasıl Alınır? İstanbul'da Bilinmesi Gerekenler",
-    h1: "Ticari Drone Çekimi İçin İzin Süreci",
-    description: "İstanbul'da ticari drone çekimi için SHGM kaydı, pilot ehliyeti, uçuş izni ve yasak bölgeler. Emlak, şantiye ve etkinlik çekimlerinde nelere dikkat edilmeli?",
-    date: "2026-08-25",
-    hub: "/drone-cekimi",
-    sections: [
-      { h2: "Kısa cevap", p: ["Türkiye'de ticari drone çekimi için cihazın Sivil Havacılık Genel Müdürlüğü (SHGM) sistemine kayıtlı olması, pilotun uygun sınıfta İHA pilot belgesine sahip olması ve uçuş yapılacak bölge için gerekliyse uçuş izni alınması gerekir. Çekimi yaptıran işletme değil, hizmeti veren operatör bu süreci yürütür."] },
-      { h2: "İstanbul'da kısıtlı bölgeler", p: ["Havalimanı çevreleri (İstanbul Havalimanı – Arnavutköy, Sabiha Gökçen – Pendik/Tuzla), askeri tesisler, kamu binaları, Boğaz hattının bazı kesimleri ve kalabalık alanlar kısıtlı ya da izne tabidir. Bu nedenle çekim noktasını önceden paylaşmanız planlamayı hızlandırır.", "Kısıtlı bir noktadaysanız çoğu zaman birkaç yüz metre öteden, farklı bir açıyla eşdeğer bir çekim mümkündür."] },
-      { h2: "İzin ne kadar sürer?", p: ["Serbest bölgelerde aynı gün çekim planlanabilir. İzne tabi bölgelerde başvuru ve onay süreci günler alabileceği için çekim tarihinden en az 1–2 hafta önce planlama yapılmasını öneriyoruz."] },
-      { h2: "Hava koşulları ve güvenlik", p: ["Kuvvetli rüzgâr ve yağışta uçuş yapılmaz; çekim uygun bir güne ertelenir. Kalabalık üzerinde uçuş, insansız hava aracı kurallarına göre kısıtlıdır; etkinlik çekimlerinde bu planlamaya dahil edilir."] },
-      { h2: "Emlak ve şantiye çekimlerinde ipuçları", p: ["Emlak: sabah veya gün batımı ışığı, çevre/ulaşım noktalarını gösteren geniş plan. Şantiye: her ay aynı noktadan aynı açıyla çekim → ilerleme videosu. Tesis: yükseklik izin sınırlarına uygun, güvenlik alanlarını dışarıda bırakan plan."] },
-    ],
-  },
-  {
     slug: "restoran-sosyal-medya-yonetimi-nasil-yapilir",
     title: "Restoran Sosyal Medya Yönetimi Nasıl Yapılır? (10 Adım)",
     h1: "Cafe ve Restoranlar İçin Sosyal Medya Rehberi",
@@ -61,5 +48,7 @@ export const posts: Post[] = [
     ],
   },
 ];
+
+export const posts: Post[] = [...guidePosts, ...basePosts];
 
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);

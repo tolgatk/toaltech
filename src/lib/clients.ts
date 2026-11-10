@@ -12,4 +12,6 @@ export const clients: Client[] = [
   { name: "Kırmızıoğlu İnşaat", url: "https://kirmiziogluyapi.com/" },
   { name: "The Capsule Food" },
   { name: "Efendy Bungalow" },
+  { name: "Decotantik" },
+  { name: "Yalçın Catering" },
 ];

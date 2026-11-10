@@ -128,7 +128,7 @@ function ProfileShowcase() {
 
 /* ---------------- Videolar ---------------- */
 
-function VideoBento() {
+export function VideoBento() {
   const [all, setAll] = useState(false);
   const featured = getReel(FEATURED)!;
   const rest = reels.filter((r) => r.slug !== FEATURED);
@@ -170,7 +170,7 @@ function VideoBento() {
   );
 }
 
-function VideoCard({ reel, featured = false }: { reel: Reel; featured?: boolean }) {
+export function VideoCard({ reel, featured = false, showTitle = false }: { reel: Reel; featured?: boolean; showTitle?: boolean }) {
   const ref = useRef<HTMLElement>(null);
   return (
     <figure
@@ -184,7 +184,7 @@ function VideoCard({ reel, featured = false }: { reel: Reel; featured?: boolean 
       <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/75 to-transparent" />
       <figcaption className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
         <span className={`block font-bold leading-tight ${featured ? "text-lg sm:text-xl" : "text-sm"}`}>{reel.brand}</span>
-        <span className={`block text-blue-100/80 ${featured ? "text-sm" : "text-xs"}`}>{featured ? reel.title : reel.kind}</span>
+        <span className={`block text-blue-100/80 ${featured ? "text-sm" : "text-xs"}`}>{featured || showTitle ? reel.title : reel.kind}</span>
       </figcaption>
     </figure>
   );

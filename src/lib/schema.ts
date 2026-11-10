@@ -1,7 +1,7 @@
-import { SITE_URL, abs } from "@/lib/seo";
+import { SITE_URL, abs, CONTENT_UPDATED } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { districts } from "@/lib/districts";
-import { reels, previewSrc, posterSrc } from "@/lib/portfolio";
+import { reels, previewSrc, posterSrc, type Reel } from "@/lib/portfolio";
 
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
@@ -19,7 +19,8 @@ export const organizationNode = {
   url: SITE_URL,
   logo: { "@type": "ImageObject", url: abs("/icon.svg") },
   image: abs("/opengraph-image"),
-  description: "İstanbul geneli web tasarım, sosyal medya yönetimi, reklam danışmanlığı, ürün ve drone çekimi.",
+  description: "İstanbul genelinde sosyal medya yönetimi, drone ve ürün çekimi, web tasarım, yazılım danışmanlığı, SEO ve reklam danışmanlığı veren dijital ajans.",
+  slogan: site.tagline,
   telephone: site.phoneTel,
   email: site.email,
   address: { "@type": "PostalAddress", addressLocality: "İstanbul", addressCountry: "TR" },
@@ -31,7 +32,7 @@ export const organizationNode = {
   ],
   contactPoint: [{ "@type": "ContactPoint", contactType: "customer service", telephone: site.phoneTel, email: site.email, availableLanguage: ["tr"], areaServed: "TR" }],
   sameAs: [site.instagram],
-  knowsAbout: ["Web tasarım", "Sosyal medya yönetimi", "Meta Ads", "Google Ads", "Ürün çekimi", "Drone çekimi"],
+  knowsAbout: ["Sosyal medya yönetimi", "Sosyal medya danışmanlığı", "Drone çekimi", "Havadan video ve fotoğraf", "Yazılım danışmanlığı", "Web tasarım", "SEO", "Yapay zeka arama optimizasyonu (GEO)", "Meta Ads", "Google Ads", "Ürün çekimi", "Reels ve reklam filmi prodüksiyonu"],
 };
 
 export const websiteNode = {
@@ -50,19 +51,35 @@ export const webPage = (path: string, name: string, description: string, type = 
   name,
   description,
   inLanguage: "tr-TR",
+  dateModified: CONTENT_UPDATED,
   isPartOf: { "@id": WEBSITE_ID },
   about: { "@id": ORG_ID },
 });
 
-export const homeGraph = { "@context": CTX, "@graph": [organizationNode, websiteNode, webPage("/", "ToalTech | İstanbul Web Tasarım & Sosyal Medya Yönetimi", organizationNode.description)] };
+type Faq = { q: string; a: string };
+/** Sayfada görünen soru-cevapların yapısal verisi (yapay zeka aramaları için) */
+export const faqNode = (path: string, faqs: Faq[]) => ({
+  "@type": "FAQPage",
+  "@id": `${abs(path)}#faq`,
+  isPartOf: { "@id": `${abs(path)}#webpage` },
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+});
 
-type S = { slug: string; name: string; intro: string };
+export const homeGraph = { "@context": CTX, "@graph": [organizationNode, websiteNode, webPage("/", "ToalTech | İstanbul Sosyal Medya, Drone Çekimi, Web ve Yazılım", organizationNode.description)] };
+
+type S = { slug: string; name: string; intro: string; metaDescription: string; benefits: string[] };
 type D = { slug: string; name: string };
 
-export const serviceHubGraph = (s: S) => ({
+const offerCatalog = (s: S) => ({
+  "@type": "OfferCatalog",
+  name: `${s.name} kapsamı`,
+  itemListElement: s.benefits.map((b) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: b } })),
+});
+
+export const serviceHubGraph = (s: S, faqs: Faq[] = []) => ({
   "@context": CTX,
   "@graph": [
-    webPage(`/${s.slug}`, `İstanbul ${s.name}`, s.intro, "CollectionPage"),
+    webPage(`/${s.slug}`, `İstanbul ${s.name}`, s.metaDescription),
     {
       "@type": "Service",
       "@id": `${abs(`/${s.slug}`)}#service`,
@@ -72,31 +89,47 @@ export const serviceHubGraph = (s: S) => ({
       url: abs(`/${s.slug}`),
       provider: { "@id": ORG_ID },
       areaServed: istanbulAreaServed,
+      hasOfferCatalog: offerCatalog(s),
       availableChannel: { "@type": "ServiceChannel", serviceUrl: abs("/iletisim"), servicePhone: { "@type": "ContactPoint", telephone: site.phoneTel } },
     },
+    ...(faqs.length ? [faqNode(`/${s.slug}`, faqs)] : []),
   ],
 });
 
-export const serviceDistrictGraph = (s: S, d: D) => {
+export const serviceDistrictGraph = (s: S, d: D, faqs: Faq[] = [], description?: string) => {
   const path = `/${s.slug}/${d.slug}`;
   return {
     "@context": CTX,
     "@graph": [
-      webPage(path, `${d.name} ${s.name}`, s.intro),
+      webPage(path, `${d.name} ${s.name}`, description ?? s.intro),
       {
         "@type": "Service",
         "@id": `${abs(path)}#service`,
         name: `${d.name} ${s.name}`,
         serviceType: s.name,
-        description: s.intro,
+        description: description ?? s.intro,
         url: abs(path),
         provider: { "@id": ORG_ID },
         isRelatedTo: { "@id": `${abs(`/${s.slug}`)}#service` },
         areaServed: { "@type": "AdministrativeArea", name: d.name, containedInPlace: { "@type": "City", name: "İstanbul" } },
       },
+      ...(faqs.length ? [faqNode(path, faqs)] : []),
     ],
   };
 };
+
+/** Liste sayfaları (hizmetler, paketler): ItemList düğümü */
+export const itemListNode = (path: string, name: string, items: { name: string; url: string }[]) => ({
+  "@type": "ItemList",
+  "@id": `${abs(path)}#list`,
+  name,
+  itemListElement: items.map((x, i) => ({ "@type": "ListItem", position: i + 1, name: x.name, url: abs(x.url) })),
+});
+
+export const pageGraph = (path: string, name: string, description: string, type = "WebPage", extra: Record<string, unknown>[] = []) => ({
+  "@context": CTX,
+  "@graph": [webPage(path, name, description, type), ...extra],
+});
 
 export const contactGraph = {
   "@context": CTX,
@@ -104,10 +137,10 @@ export const contactGraph = {
 };
 export const aboutGraph = {
   "@context": CTX,
-  "@graph": [webPage("/hakkimizda", "Hakkımızda | ToalTech", "ToalTech: İstanbul merkezli web tasarım ve sosyal medya ekibi.", "AboutPage")],
+  "@graph": [{ ...webPage("/hakkimizda", "Hakkımızda | ToalTech", "ToalTech: çekim, kurgu, tasarım, yazılım ve reklamı tek ekipte yürüten İstanbul merkezli dijital ajans.", "AboutPage"), mainEntity: { "@id": ORG_ID } }],
 };
 
-export const articleGraph = (a: { slug: string; title: string; description: string; date: string }) => ({
+export const articleGraph = (a: { slug: string; title: string; description: string; date: string; updated?: string; faq?: Faq[] }) => ({
   "@context": CTX,
   "@graph": [
     webPage(`/blog/${a.slug}`, a.title, a.description),
@@ -117,12 +150,13 @@ export const articleGraph = (a: { slug: string; title: string; description: stri
       headline: a.title,
       description: a.description,
       datePublished: a.date,
-      dateModified: a.date,
+      dateModified: a.updated ?? a.date,
       inLanguage: "tr-TR",
       author: { "@id": ORG_ID },
       publisher: { "@id": ORG_ID },
       mainEntityOfPage: { "@id": `${abs(`/blog/${a.slug}`)}#webpage` },
     },
+    ...(a.faq?.length ? [faqNode(`/blog/${a.slug}`, a.faq)] : []),
   ],
 });
 
@@ -155,8 +189,8 @@ export const camTabloGraph = (path: string, name: string, description: string, a
 });
 
 /** Gerçek müşteri videoları: video sonuçlarında görünmek için VideoObject düğümleri */
-export const reelVideoNodes = (slugs?: string[]) =>
-  reels
+export const reelVideoNodes = (slugs?: string[], list: Reel[] = reels) =>
+  list
     .filter((r) => !slugs || slugs.includes(r.slug))
     .map((r) => ({
       "@type": "VideoObject",

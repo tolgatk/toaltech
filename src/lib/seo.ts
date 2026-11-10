@@ -1,6 +1,6 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://toaltech.com";
 export const abs = (path: string) => `${SITE_URL}${path}`;
 /** İçerikte anlamlı bir değişiklik yaptığında güncelle (sitemap lastmod). */
-export const CONTENT_UPDATED = "2026-10-04";
+export const CONTENT_UPDATED = "2026-11-10";
 /** Cam tablo sayfalarının son içerik güncellemesi (sitemap lastmod). */
 export const CAM_TABLO_UPDATED = "2026-09-27";
