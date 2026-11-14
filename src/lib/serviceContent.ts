@@ -369,6 +369,175 @@ export const serviceContent: Record<string, ServiceContent> = {
     posts: ["sosyal-medya-danismanligi-nedir", "sosyal-medya-yonetimi-fiyatlari-2026", "instagram-reklam-butcesi-ne-kadar-olmali"],
     related: ["sosyal-medya-yonetimi", "reklam-danismanligi", "cafe-sosyal-medya-danismanligi"],
   },
+
+  "reklam-ajansi": {
+    title: "İstanbul Reklam Ajansı: Çekim, Kreatif, Reklam",
+    eyebrow: "İstanbul geneli · Çekim · Kreatif · Meta ve Google reklamları",
+    answer:
+      "ToalTech, İstanbul'da işletmeler için reklamın bütün adımlarını tek ekipte yürüten bir reklam ajansıdır: reklam filmi ve ürün çekimi, görsel ve metin tasarımı, Meta (Instagram, Facebook) ve Google Ads yönetimi, reklamın yönlendiği web sitesi. Çekimi işletmenizde yapar, reklamları ilçenize ve çevresine hedefler, gelen arama ve mesajları aylık raporla gösteririz.",
+    highlights: [
+      { v: "Tek ekip", l: "çekim, tasarım, reklam ve web" },
+      { v: "Yerinde çekim", l: "İstanbul'un iki yakasında" },
+      { v: "Meta + Google", l: "reklam hesapları size ait" },
+      { v: "Aylık rapor", l: "harcama, mesaj ve arama sayıları" },
+    ],
+    useCasesTitle: "Reklam ajansı hangi işlerde gerekir?",
+    useCasesLead: "İşletmelerin bize en sık geldiği durumlar:",
+    useCases: [
+      { icon: Megaphone, title: "Yeni açılış ve lansman", text: "Açılış öncesi geri sayım videoları, açılış günü çekimi ve çevredeki müşterilere hedefli reklamlarla mekânın ilk haftalardan duyulması." },
+      { icon: GraduationCap, title: "Kayıt ve sezon kampanyası", text: "Kurs, okul, spor salonu ve klinikler için kayıt dönemine özel reklam filmi ve başvuru odaklı reklamlar." },
+      { icon: UtensilsCrossed, title: "Restoran, kafe ve mekân", text: "Menü ve mekân çekimi, rezervasyona yönlendiren Instagram reklamları ve Google Haritalar görünürlüğü." },
+      { icon: Building2, title: "Emlak ve konut projesi", text: "Drone çekimi, proje tanıtım filmi ve talep formu toplayan reklam kampanyaları." },
+      { icon: ShoppingCart, title: "Ürün ve e-ticaret", text: "Ürün çekimi, satışa yönlendiren Meta reklamları ve Google alışveriş aramaları için açılış sayfası." },
+      { icon: Target, title: "Reklam veriyor ama sonuç alamayanlar", text: "Mevcut hesapların denetimi: hedefleme, kreatif, açılış sayfası ve ölçüm eksiklerinin tespiti ve yeniden kurulum." },
+    ],
+    stepDetails: [
+      "Neyi satmak istediğinizi, kime ulaşmak istediğinizi ve ayırabileceğiniz bütçeyi konuşuruz.",
+      "Kampanya fikrini, çekilecek videoları ve görselleri, yayınlanacak platformları yazılı plan olarak sunarız.",
+      "Çekimi işletmenizde yapar, kurgular ve tasarlar; onayınızdan sonra reklamları yayına alırız.",
+      "Harcamayı, gelen mesaj ve aramaları her ay raporlar; işlemeyen reklamı durdurur, işleyeni büyütürüz.",
+    ],
+    sections: [
+      {
+        h2: "Reklam ajansı ne iş yapar?",
+        p: [
+          "Reklam ajansı, bir işletmenin doğru kişiye doğru mesajla ulaşması için gereken işleri planlar ve üretir: kampanya fikri, video ve görsel üretimi, reklamın yayınlanacağı mecraların seçimi, bütçenin yönetimi ve sonucun ölçülmesi.",
+          "Bugün yerel işletmeler için reklamın büyük kısmı dijitalde dönüyor: Instagram ve Facebook reklamları, Google arama reklamları ve Google Haritalar. Bu yüzden iyi bir reklam yalnızca güzel bir görsel değildir; o görselin kime gösterildiği, tıklayan kişinin nereye düştüğü ve sonunda arayıp aramadığı da işin parçasıdır.",
+          "ToalTech'te bu halkaların hepsi aynı ekiptedir. Videoyu çeken ekip reklamı da yönetir, reklamın yönlendiği sayfayı da kurar. Böylece çekim ajansı, reklamcı ve web tasarımcı arasında mekik dokumazsınız.",
+        ],
+      },
+      {
+        h2: "Hangi reklam kanallarını yönetiyoruz?",
+        p: [
+          "Kanal seçimi işinize göre değişir. Müşteriniz sizi arayarak buluyorsa (tesisatçı, klinik, kurs) Google arama reklamları öne çıkar. Müşterinizin gözüne görünerek ihtiyaç doğuruyorsanız (restoran, butik, mekân) Instagram ve Facebook reklamları daha verimlidir. Çoğu işletmede ikisi birlikte kullanılır.",
+        ],
+        list: [
+          "Meta reklamları: Instagram ve Facebook'ta video, Reels ve hikâye reklamları; WhatsApp'a mesaj ya da form hedefli kampanyalar",
+          "Google Ads: arama reklamları, ilçe ve mahalle bazlı hedefleme, telefon araması ve WhatsApp tıklaması ölçümü",
+          "Google Haritalar: işletme profili düzeni, fotoğraf ve yorum yönetimi",
+          "Reklamın yönlendiği web sitesi ya da açılış sayfası",
+        ],
+      },
+      {
+        h2: "Reklam kreatifi neden çekimle başlar?",
+        p: [
+          "Aynı bütçeyle yayınlanan iki reklam arasındaki farkı çoğunlukla video belirler. Stok görüntüyle hazırlanan reklam, işletmenin kendi mekânında ve kendi ürünüyle çekilen videonun yerini tutmaz; izleyen kişi gerçek mekânı ve gerçek insanları görmek ister.",
+          "Bu nedenle çalışmaya çekim planıyla başlarız. Çekmeköy'deki Atak Fen Bilimleri için hazırladığımız kayıt dönemi reklam filminde çekim, kurgu, altyazı ve seslendirme bize aitti; film Meta reklamlarında kreatif olarak kullanıldı. Beylikdüzü'ndeki The Capsule için ise açılış öncesi geri sayım videolarından açılış gününe uzanan bir seri hazırladık.",
+        ],
+      },
+      {
+        h2: "Sonuç nasıl ölçülür?",
+        p: [
+          "Beğeni ve görüntülenme tek başına bir şey söylemez. Raporlarımızda harcanan tutarı, reklamdan gelen WhatsApp mesajı, telefon araması ve form sayısını, bunların birim maliyetini gösteririz. Reklam hesapları sizin adınıza açılır; istediğiniz an kendiniz de girip bakabilirsiniz.",
+          "Reklamın müşteri getirip getirmediği, mesaj atanların ne kadarının gerçekten alıcı olduğuna da bağlıdır. Bu yüzden ilk haftalarda gelen mesajların niteliğini sizinle birlikte değerlendirir, hedeflemeyi buna göre daraltırız.",
+        ],
+      },
+    ],
+    priceTitle: "Reklam ajansı ücreti neye göre belirlenir?",
+    priceFactors: [
+      { t: "Hizmet kapsamı", d: "Yalnızca reklam yönetimi ile çekim, tasarım ve web sitesi dahil tam hizmet farklı fiyatlanır." },
+      { t: "Çekim sıklığı", d: "Tek seferlik reklam filmi ile her ay yenilenen çekim ayrı işlerdir." },
+      { t: "Kanal sayısı", d: "Yalnızca Meta, yalnızca Google ya da ikisi birlikte yönetim." },
+      { t: "Reklam bütçesi", d: "Reklam bütçesi platformlara doğrudan sizin hesabınızdan ödenir; ajans ücretine dahil değildir." },
+      { t: "İçerik adedi", d: "Ayda kaç video, kaç görsel ve kaç kampanya hazırlanacağı." },
+      { t: "Çalışma süresi", d: "Düzenli aylık çalışmada birim maliyet tek seferlik işlere göre düşer." },
+    ],
+    faq: [
+      { q: "Reklam ajansı fiyatları ne kadar?", a: "Ücret; kapsama (yalnızca reklam yönetimi mi, çekim ve tasarım dahil mi), çekim sıklığına ve yönetilecek kanal sayısına göre değişir. Reklam bütçesi ajans ücretinden ayrıdır ve platformlara sizin hesabınızdan ödenir. İşletmenizi ve hedefinizi WhatsApp'tan yazarsanız yazılı kapsamla net teklif veriyoruz." },
+      { q: "İstanbul'un hangi ilçelerinde çalışıyorsunuz?", a: "İstanbul'un iki yakasında çalışıyoruz. Çekim için işletmenize geliyor, reklamları ilçenize ve çevresindeki mahallelere hedefliyoruz." },
+      { q: "Instagram reklamı da veriyor musunuz?", a: "Evet. Instagram ve Facebook reklamlarını Meta reklam yöneticisi üzerinden kuruyor ve yönetiyoruz: video ve Reels reklamları, WhatsApp'a mesaj hedefli kampanyalar ve yeniden pazarlama." },
+      { q: "Google reklamı mı Instagram reklamı mı daha iyi?", a: "İşinize göre değişir. Müşteri sizi ihtiyaç anında arıyorsa Google arama reklamları, ürün ya da mekânı görerek karar veriyorsa Instagram reklamları daha verimlidir. İlk görüşmede hangisiyle başlamanın doğru olduğunu birlikte belirliyoruz." },
+      { q: "Reklamdan ne kadar sürede sonuç alınır?", a: "Reklamlar yayına girdiği gün gösterilmeye başlar; ilk mesaj ve aramalar genellikle ilk günlerde gelir. Hangi reklamın ve hangi kitlenin işlediğini görmek ve maliyeti düşürmek için 2-4 haftalık veri gerekir." },
+      { q: "Sözleşme süresi var mı?", a: "Tek seferlik işler (reklam filmi, kampanya kurulumu) ayrıca yapılabilir. Düzenli reklam yönetiminde en az 3 aylık çalışma öneriyoruz; kapsam ve süre teklifte yazılı olarak belirtilir." },
+    ],
+    posts: ["instagram-reklam-butcesi-ne-kadar-olmali", "sosyal-medya-yonetimi-fiyatlari-2026"],
+    related: ["reklam-filmi-cekimi", "reklam-danismanligi", "sosyal-medya-yonetimi"],
+  },
+
+  "reklam-filmi-cekimi": {
+    title: "İstanbul Reklam Filmi ve Tanıtım Filmi Çekimi",
+    eyebrow: "İstanbul geneli · Senaryo · Çekim · Drone · Kurgu",
+    answer:
+      "ToalTech, İstanbul'da işletmeler için reklam filmi, kurumsal tanıtım filmi ve sosyal medya reklam videosu çeker. Senaryo, çekim, drone, kurgu, seslendirme ve altyazı aynı ekipte yapılır; film web siteniz için yatay, Instagram Reels ve reklamlar için dikey sürümleriyle birlikte teslim edilir.",
+    highlights: [
+      { v: "4K", l: "kamera ve drone çekimi" },
+      { v: "Senaryodan teslime", l: "tek ekip" },
+      { v: "Yatay + dikey", l: "web, Reels ve reklam sürümleri" },
+      { v: "Seslendirme", l: "ve altyazı dahil edilebilir" },
+    ],
+    useCasesTitle: "Hangi tür filmleri çekiyoruz?",
+    useCasesLead: "Filmin türünü, nerede yayınlanacağı ve izleyenin ne yapmasını istediğiniz belirler:",
+    useCases: [
+      { icon: Clapperboard, title: "Reklam filmi", text: "Tek mesaja ve tek çağrıya odaklanan 15-60 saniyelik film. Instagram, Facebook ve YouTube reklamlarında yayınlanmak üzere hazırlanır." },
+      { icon: Building2, title: "Kurumsal tanıtım filmi", text: "Firmayı, ekibi ve çalışma biçimini anlatan 1-3 dakikalık film. Web sitesi, teklif sunumu ve fuar ekranı için." },
+      { icon: Hotel, title: "Mekân ve tesis tanıtımı", text: "Davet salonu, otel, restoran ve tesisler için mekânı gezdiren, konumu ve olanakları gösteren film; drone planlarıyla birlikte." },
+      { icon: GraduationCap, title: "Kayıt ve kampanya filmi", text: "Okul, kurs ve klinikler için kayıt ya da kampanya dönemine özel, seslendirmeli ve altyazılı film." },
+      { icon: Factory, title: "Fabrika ve üretim filmi", text: "Üretim hattını, kapasiteyi ve kalite sürecini gösteren film; ihracat sunumları ve bayi toplantıları için." },
+      { icon: Smartphone, title: "Sosyal medya reklam videosu", text: "Dikey çekilen, ilk saniyede dikkat çeken kısa videolar; aynı çekimden birkaç farklı sürüm hazırlanır." },
+    ],
+    stepDetails: [
+      "Filmin kime, nerede gösterileceğini ve izleyenin ne yapmasını istediğinizi konuşuruz.",
+      "Senaryoyu ya da çekim akışını, plan listesini ve çekim gününün programını yazılı olarak onayınıza sunarız.",
+      "Çekimi işletmenizde ya da belirlenen mekânda yaparız; gerekiyorsa drone planları aynı gün çekilir.",
+      "Kurgu, renk, müzik, altyazı ve seslendirme tamamlanır; revizyonunuzdan sonra bütün sürümler teslim edilir.",
+    ],
+    sections: [
+      {
+        h2: "Reklam filmi ile tanıtım filmi arasındaki fark",
+        p: [
+          "İkisi sık karıştırılır ama amaçları farklıdır. Reklam filmi sizi tanımayan birine gösterilir; bu yüzden kısadır, tek bir şey söyler ve bir çağrıyla biter: arayın, yazın, kayıt olun. Süre çoğunlukla 15 ile 60 saniye arasındadır.",
+          "Tanıtım filmi ise sizi zaten merak eden kişiye gösterilir: web sitenize giren, teklifinizi inceleyen, fuarda standınıza uğrayan kişi. Daha uzundur (genellikle 1-3 dakika), firmayı, mekânı ya da süreci anlatır.",
+          "Çoğu işletme için en verimli yol tek çekim gününden ikisini birden çıkarmaktır: bir tanıtım filmi ve ondan kesilen birkaç kısa reklam videosu.",
+        ],
+      },
+      {
+        h2: "Çekim süreci nasıl ilerler?",
+        p: [
+          "İyi bir filmin işinin büyük kısmı çekimden önce biter. Senaryo ya da çekim akışı, hangi planın nerede ve hangi saatte çekileceği, kimin kamera karşısına geçeceği çekim gününden önce yazılı hale gelir. Böylece çekim günü işletmenizin çalışması en az şekilde aksar.",
+          "Çekim gününde kamera, ışık ve ses ekipmanıyla işletmenize geliriz. Dış plan ve genel görünüm gereken işlerde drone çekimi aynı gün yapılır; uçuşa uygunluk kontrolünü önceden biz yaparız.",
+          "Kurgu aşamasında renk düzenlemesi, müzik, altyazı ve istenirse seslendirme eklenir. İlk kurguyu size gönderir, düzeltme isteklerinizi aldıktan sonra son sürümü hazırlarız.",
+        ],
+      },
+      {
+        h2: "Yaptığımız işlerden örnekler",
+        p: [
+          "Çekmeköy'deki Atak Fen Bilimleri için hazırladığımız kayıt dönemi reklam filminde çekim, kurgu, altyazı ve seslendirme bize aitti; film Meta reklamlarında kullanıldı. Aynı kurum için 4K kurum tanıtım videosu da çektik.",
+          "Esenyurt Kıraç'taki Atalar Davet Evi için salonu, dekoru ve mutfak olanaklarını konum bilgisiyle anlatan bir tanıtım filmi hazırladık. Beylikdüzü'ndeki The Capsule için açılış öncesi geri sayım serisini ve ürün videolarını çektik. Bu işlerden kesitleri referanslar sayfamızda izleyebilirsiniz.",
+        ],
+      },
+      {
+        h2: "Teslimde neler alırsınız?",
+        p: ["Tek bir video dosyası değil, kullanacağınız her yer için hazır sürümler teslim ederiz."],
+        list: [
+          "Web sitesi, YouTube ve sunumlar için yatay (16:9) ana film",
+          "Instagram Reels, TikTok ve hikâye için dikey (9:16) sürüm",
+          "Reklamlarda kullanmak üzere kısa kesitler",
+          "Sessiz izleyenler için altyazılı sürüm",
+          "İstenirse çekimden seçilmiş fotoğraflar",
+        ],
+      },
+    ],
+    priceTitle: "Reklam filmi ve tanıtım filmi fiyatı neye göre belirlenir?",
+    priceFactors: [
+      { t: "Çekim süresi", d: "Yarım günlük tek mekân çekimi ile birden fazla gün ve mekâna yayılan çekim farklı fiyatlanır." },
+      { t: "Senaryo ve hazırlık", d: "Hazır bir metinle çekim ile fikrin ve senaryonun baştan yazıldığı iş ayrıdır." },
+      { t: "Oyuncu ve seslendirme", d: "Kamera karşısına ekibiniz mi geçecek, oyuncu ya da seslendirme sanatçısı mı gerekecek; teklifte ayrıca yazılır." },
+      { t: "Drone ve ek ekipman", d: "Havadan çekim, ek ışık ve özel ekipman ihtiyacı." },
+      { t: "Kurgu kapsamı", d: "Filmin süresi, hareketli grafik, altyazı ve kaç farklı sürüm isteneceği." },
+      { t: "Revizyon sayısı", d: "Teklifte belirtilen revizyon hakkının üzerindeki değişiklikler ayrıca fiyatlanır." },
+    ],
+    faq: [
+      { q: "Reklam filmi çekimi fiyatları ne kadar?", a: "Fiyat; çekim süresine, senaryo hazırlığına, oyuncu ve seslendirme ihtiyacına, drone kullanımına ve kurgu kapsamına göre değişir. Ne için ve nerede kullanacağınızı WhatsApp'tan yazarsanız yazılı kapsamla net teklif veriyoruz." },
+      { q: "Tanıtım filmi kaç dakika olmalı?", a: "Web sitesi ve sunum için 1-3 dakika yeterlidir; daha uzun filmler çoğunlukla sonuna kadar izlenmez. Sosyal medya ve reklam için aynı çekimden 15-60 saniyelik kısa sürümler hazırlıyoruz." },
+      { q: "Çekim ne kadar sürer, filmi ne zaman teslim alırım?", a: "Tek mekânda çekim çoğunlukla yarım ya da bir gün sürer. Kurgulanmış ilk sürümü işin kapsamına göre genellikle 1-2 hafta içinde gönderiyoruz; kesin tarihi çekimden önce netleştiriyoruz." },
+      { q: "Senaryoyu kim yazıyor?", a: "İsterseniz hazır metninizle çekim yaparız, isterseniz fikri ve senaryoyu biz yazarız. Her iki durumda da çekimden önce yazılı akışı onayınıza sunuyoruz." },
+      { q: "Seslendirme ve altyazı yapıyor musunuz?", a: "Evet. Seslendirme, altyazı ve müzik kurgu aşamasında eklenir; kapsam teklifte belirtilir." },
+      { q: "Drone çekimi filme dahil mi?", a: "Mekânın konumunu ya da büyüklüğünü göstermek gereken işlerde drone planları ekliyoruz. Lokasyonun uçuşa uygun olup olmadığına çekimden önce bakıyoruz." },
+      { q: "Çekilen ham görüntüleri de alabilir miyim?", a: "Evet, istenirse ham görüntüler de teslim edilir; bunu teklif aşamasında belirtmeniz yeterli." },
+    ],
+    posts: ["instagram-reklam-butcesi-ne-kadar-olmali", "drone-cekimi-fiyatlari-2026"],
+    related: ["reklam-ajansi", "drone-cekimi", "sosyal-medya-yonetimi"],
+  },
 };
 
 export const getServiceContent = (slug: string): ServiceContent | undefined => serviceContent[slug];
@@ -379,6 +548,8 @@ export const serviceIcons: Record<string, LucideIcon> = {
   "web-tasarim": Monitor,
   "sosyal-medya-danismanligi": Compass,
   "reklam-danismanligi": Megaphone,
+  "reklam-ajansi": Target,
+  "reklam-filmi-cekimi": Clapperboard,
   "sosyal-medya-yonetimi": Users,
   "yazilim-danismanligi": Code,
   "urun-cekimi": Camera,

@@ -10,7 +10,7 @@ import ReelsMarquee from "@/components/showcase/ReelsMarquee";
 import DroneShowcase from "@/components/showcase/DroneShowcase";
 import ServiceHero from "@/components/service/ServiceHero";
 import { FaqSection, PriceFactors, RelatedPosts, ScopeAndProcess, UseCases } from "@/components/service/ServiceSections";
-import { localServices, getLocalService } from "@/lib/localServices";
+import { localServices, getLocalService, hasDistrictPage } from "@/lib/localServices";
 import { getServiceContent, serviceIcons } from "@/lib/serviceContent";
 import { districts, getDistrict } from "@/lib/districts";
 import { localFaq, localNote, localUseCases, matchedSectors } from "@/lib/localContent";
@@ -21,11 +21,11 @@ import { abs } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 /** Gerçek video işlerinin gösterildiği hizmetler */
-const SHOWS_REELS = new Set(["sosyal-medya-danismanligi", "sosyal-medya-yonetimi", "reklam-danismanligi", "cafe-sosyal-medya-danismanligi", "restoran-sosyal-medya-danismanligi"]);
+const SHOWS_REELS = new Set(["sosyal-medya-danismanligi", "sosyal-medya-yonetimi", "reklam-danismanligi", "reklam-ajansi", "cafe-sosyal-medya-danismanligi", "restoran-sosyal-medya-danismanligi"]);
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return localServices.flatMap((s) => districts.map((d) => ({ hizmet: s.slug, ilce: d.slug })));
+  return localServices.flatMap((s) => districts.filter((d) => hasDistrictPage(s, d.slug)).map((d) => ({ hizmet: s.slug, ilce: d.slug })));
 }
 
 type Params = Promise<{ hizmet: string; ilce: string }>;
@@ -52,7 +52,7 @@ export default async function Page({ params }: { params: Params }) {
   const { hizmet, ilce } = await params;
   const s = getLocalService(hizmet);
   const d = getDistrict(ilce);
-  if (!s || !d) notFound();
+  if (!s || !d || !hasDistrictPage(s, d.slug)) notFound();
 
   const c = getServiceContent(s.slug);
   const drone = s.slug === "drone-cekimi";
@@ -60,8 +60,12 @@ export default async function Page({ params }: { params: Params }) {
   const secs = matchedSectors(s, d);
   // İlçeye özel sorular önce, ardından hizmetin genel soruları
   const faqs = [...localFaq(s, d), ...(c?.faq.slice(0, 4) ?? []), ...s.faq.slice(0, 2)].filter((f, i, all) => all.findIndex((x) => x.q === f.q) === i);
-  const nearby = districts.filter((x) => x.side === d.side && x.slug !== d.slug).sort((a, b) => a.tier - b.tier).slice(0, 10);
-  const others = localServices.filter((o) => o.slug !== s.slug).slice(0, 6);
+  // Yalnızca birkaç ilçede sayfası olan hizmetlerde yaka ayrımı yapılmaz
+  const nearby = districts
+    .filter((x) => x.slug !== d.slug && hasDistrictPage(s, x.slug) && (s.districts || x.side === d.side))
+    .sort((a, b) => a.tier - b.tier)
+    .slice(0, 10);
+  const others = localServices.filter((o) => o.slug !== s.slug && hasDistrictPage(o, d.slug)).slice(0, 6);
 
   const graph = serviceDistrictGraph(s, d, faqs, describe(s, d));
   const videos = drone ? reelVideoNodes(undefined, droneReels) : [];

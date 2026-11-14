@@ -9,7 +9,8 @@ import SocialServiceShowcase from "@/components/showcase/SocialServiceShowcase";
 import DroneShowcase from "@/components/showcase/DroneShowcase";
 import ServiceHero from "@/components/service/ServiceHero";
 import { AnswerBox, FaqSection, Longform, PriceFactors, RelatedPosts, ScopeAndProcess, UseCases } from "@/components/service/ServiceSections";
-import { localServices, getLocalService } from "@/lib/localServices";
+import ReelsMarquee from "@/components/showcase/ReelsMarquee";
+import { localServices, getLocalService, hasDistrictPage } from "@/lib/localServices";
 import { getServiceContent, serviceIcons } from "@/lib/serviceContent";
 import { districts } from "@/lib/districts";
 import { droneReels } from "@/lib/portfolio";
@@ -18,6 +19,9 @@ import { abs } from "@/lib/seo";
 
 /** Gerçek video işleriyle zenginleştirilmiş vitrin düzenini kullanan hizmetler */
 const SHOWCASE = new Set(["sosyal-medya-danismanligi", "sosyal-medya-yonetimi"]);
+
+/** Hero'nun altında gerçek işlerden kayan video şeridi gösterilen hizmetler */
+const REELS_STRIP = new Set(["reklam-ajansi", "reklam-filmi-cekimi"]);
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -46,11 +50,11 @@ export default async function Page({ params }: { params: Promise<{ hizmet: strin
   const drone = s.slug === "drone-cekimi";
   const faqs = [...(c?.faq ?? []), ...s.faq].filter((f, i, all) => all.findIndex((x) => x.q === f.q) === i);
 
-  const byTier = [...districts].sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name, "tr"));
+  const byTier = districts.filter((d) => hasDistrictPage(s, d.slug)).sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name, "tr"));
   const groups = [
     { label: "Avrupa Yakası", list: byTier.filter((d) => d.side === "Avrupa") },
     { label: "Anadolu Yakası", list: byTier.filter((d) => d.side === "Anadolu") },
-  ];
+  ].filter((g) => g.list.length > 0);
   const others = c ? c.related.map((x) => getLocalService(x)).filter((x): x is NonNullable<typeof x> => !!x) : [];
   const rest = localServices.filter((o) => o.slug !== s.slug && !others.includes(o));
 
@@ -71,6 +75,9 @@ export default async function Page({ params }: { params: Promise<{ hizmet: strin
           <ServiceHero s={s} c={c} />
           {c && <AnswerBox s={s} c={c} />}
           {drone && <DroneShowcase />}
+          {REELS_STRIP.has(s.slug) && (
+            <ReelsMarquee title="İstanbul'daki müşterilerimiz için çektiklerimiz" desc="Reklam filmi, tanıtım filmi ve Reels işlerimizden kesitler; çekim ve kurgu ekibimize ait." />
+          )}
           {c && <UseCases c={c} />}
           <ScopeAndProcess s={s} c={c} />
         </>
@@ -88,6 +95,7 @@ export default async function Page({ params }: { params: Promise<{ hizmet: strin
       {c && <RelatedPosts slugs={c.posts} />}
 
       {/* İlçe sayfaları */}
+      {groups.length > 0 && (
       <section aria-labelledby="ilceler" className="py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500">Hizmet Bölgeleri</p>
@@ -111,6 +119,7 @@ export default async function Page({ params }: { params: Promise<{ hizmet: strin
           </div>
         </div>
       </section>
+      )}
 
       {/* Diğer hizmetler */}
       <section aria-labelledby="diger" className="pb-6">

@@ -9,7 +9,15 @@ export type LocalService = {
   benefits: string[];
   steps: string[];
   faq: { q: string; a: string }[];
+  /**
+   * İlçe sayfası açılacak ilçe slug'ları. Verilmezse tüm ilçeler için sayfa üretilir;
+   * boş dizi yalnızca İstanbul ana sayfasını üretir (arama hacmi olmayan ilçelere ince sayfa açmamak için).
+   */
+  districts?: string[];
 };
+
+/** Hizmetin {ilce} sayfası var mı? */
+export const hasDistrictPage = (s: LocalService, districtSlug: string) => !s.districts || s.districts.includes(districtSlug);
 
 export const localServices: LocalService[] = [
   {
@@ -74,6 +82,40 @@ export const localServices: LocalService[] = [
       { q: "Minimum reklam bütçesi ne olmalı?", a: "Sektöre göre değişmekle birlikte yerel işletmeler için günlük 150–300 TL ile anlamlı sonuç alınabilecek kampanyalar kurulabilir. Bütçeyi hedefinize göre birlikte belirleriz." },
       { q: "Sadece ilçemdeki müşterilere reklam gösterebilir miyim?", a: "Evet. Reklamları ilçe, mahalle hatta işletmenizin çevresindeki belirli kilometre yarıçapı ile sınırlandırabiliyoruz." },
       { q: "Reklam hesabı kime ait olur?", a: "Reklam hesapları ve sayfalar her zaman size ait kalır; biz yetkili olarak yönetiriz." },
+    ],
+  },
+  {
+    slug: "reklam-ajansi",
+    districts: ["beylikduzu", "kadikoy", "sisli"],
+    metaDescription: "İstanbul reklam ajansı: reklam filmi ve ürün çekimi, kreatif tasarım, Meta ve Google reklam yönetimi, web sitesi tek ekipte. Yazılı kapsam, tek muhatap, şeffaf rapor.",
+    fitSectors: ["perakende", "restoran", "kafe", "sağlık", "emlak", "eğitim", "AVM", "otomotiv", "mobilya", "düğün", "otel", "klinik", "butik", "plaza", "fuar"],
+    localNote: "{ilce_deki} işletmeler için reklam ajansı olarak çekimi işyerinizde yapıyor, reklamları {ilce} ve çevresindeki mahallelere hedefliyor, gelen mesaj ve aramaları aylık raporla gösteriyoruz. Çekim, tasarım, reklam yönetimi ve web sitesi aynı ekipte olduğu için tek muhatapla çalışırsınız.",
+    name: "Reklam Ajansı",
+    keyword: "reklam ajansı",
+    intro: "Reklam filmi ve ürün çekiminden kreatif tasarıma, Meta ve Google reklam yönetiminden web sitesine kadar reklamın bütün adımlarını tek ekipte yürütüyoruz. Hedef beğeni değil; arama, mesaj ve satış.",
+    benefits: ["Reklam filmi, Reels ve ürün çekimi", "Reklam görselleri, metinleri ve kampanya fikri", "Meta (Instagram, Facebook) ve Google Ads yönetimi", "Reklamın yönlendiği web sitesi ve açılış sayfası", "Dönüşüm takibi ve aylık rapor"],
+    steps: ["Hedef, kitle ve bütçe görüşmesi", "Kampanya fikri ve çekim planı", "Çekim, tasarım ve yayın", "Ölçme, rapor ve iyileştirme"],
+    faq: [
+      { q: "Reklam ajansı ile reklam danışmanlığı arasındaki fark nedir?", a: "Reklam danışmanlığında reklam hesaplarınızı kurar ve yönetiriz; görselleri siz sağlayabilirsiniz. Reklam ajansı hizmetinde çekim, tasarım, metin, reklam yönetimi ve gerekiyorsa web sitesi dahil bütün işi biz üstleniriz." },
+      { q: "Reklam hesapları ve çekilen görüntüler kime ait olur?", a: "Reklam hesapları, sayfalar ve teslim edilen bütün video ve görseller size aittir; biz yetkili olarak yönetiriz." },
+      { q: "Küçük bir işletme için reklam ajansıyla çalışmak mantıklı mı?", a: "Reklama düzenli bütçe ayırabiliyorsanız evet. Kapsamı ihtiyaca göre kuruyoruz: yalnızca çekim ve reklam yönetimiyle başlayıp sonradan genişletmek mümkün." },
+    ],
+  },
+  {
+    slug: "reklam-filmi-cekimi",
+    districts: [],
+    metaDescription: "İstanbul reklam filmi ve tanıtım filmi çekimi: senaryo, çekim, drone, kurgu, seslendirme ve altyazı tek ekipte. Yatay ve dikey teslim, reklamda kullanıma hazır.",
+    fitSectors: ["eğitim", "restoran", "kafe", "otel", "düğün", "sağlık", "klinik", "emlak", "sanayi", "perakende", "turizm"],
+    localNote: "{ilce_deki} işletmeniz için reklam filmi çekimini yerinde yapıyoruz.",
+    name: "Reklam Filmi Çekimi",
+    keyword: "reklam filmi çekimi",
+    intro: "İşletmeniz için reklam filmi, kurumsal tanıtım filmi ve sosyal medya reklam videosu çekiyoruz. Senaryo, çekim, drone, kurgu, seslendirme ve altyazı aynı ekipte; teslim edilen dosyalar reklamda kullanıma hazır.",
+    benefits: ["Senaryo ve çekim planı", "4K kamera ve drone çekimi", "Kurgu, renk, müzik ve altyazı", "Seslendirme", "Yatay (16:9) ve dikey (9:16) teslim"],
+    steps: ["Amaç ve mesaj görüşmesi", "Senaryo ve çekim planı", "Çekim günü", "Kurgu, revizyon ve teslim"],
+    faq: [
+      { q: "Reklam filmi ile tanıtım filmi arasındaki fark nedir?", a: "Reklam filmi tek bir mesaja ve çağrıya odaklanan, genellikle 15-60 saniyelik videodur; reklam olarak yayınlanır. Tanıtım filmi ise işletmeyi, tesisi ya da hizmeti daha geniş anlatan, çoğunlukla 1-3 dakikalık videodur; web sitesi, sunum ve fuarlarda kullanılır." },
+      { q: "Çekim için işletmemize geliyor musunuz?", a: "Evet. İstanbul genelinde çekimi işletmenizde, tesisinizde ya da belirlediğiniz mekânda yapıyoruz." },
+      { q: "Filmi sosyal medya reklamlarında kullanabilir miyim?", a: "Evet. Yatay sürümün yanında Instagram Reels, TikTok ve hikâye için dikey sürümleri ve reklamlar için kısa kesitleri de teslim ediyoruz." },
     ],
   },
   {

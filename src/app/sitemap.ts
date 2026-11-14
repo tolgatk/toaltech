@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { localServices } from "@/lib/localServices";
+import { localServices, hasDistrictPage } from "@/lib/localServices";
 import { districts } from "@/lib/districts";
 import { posts } from "@/lib/posts";
 import { semtler } from "@/lib/camTablo";
@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date(CONTENT_UPDATED);
   const statics = ["/", "/hizmetlerimiz", "/paketlerimiz", "/hakkimizda", "/referanslar", "/iletisim", "/blog", "/kvkk-aydinlatma-metni", "/kartvizit"].map((p) => ({ url: abs(p), lastModified }));
   const hubs = localServices.map((s) => ({ url: abs(`/${s.slug}`), lastModified }));
-  const locals = localServices.flatMap((s) => districts.map((d) => ({ url: abs(`/${s.slug}/${d.slug}`), lastModified })));
+  const locals = localServices.flatMap((s) => districts.filter((d) => hasDistrictPage(s, d.slug)).map((d) => ({ url: abs(`/${s.slug}/${d.slug}`), lastModified })));
   const camTablo = [
     { url: abs("/cam-tablo"), lastModified: new Date(CAM_TABLO_UPDATED) },
     ...districts.map((d) => ({ url: abs(`/cam-tablo/${d.slug}`), lastModified: new Date(CAM_TABLO_UPDATED) })),
