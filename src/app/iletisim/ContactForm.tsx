@@ -18,6 +18,7 @@ export default function ContactForm() {
     e.preventDefault();
     const text = `Merhaba, ben ${form.name}.\nTelefon: ${form.phone}\nİlgilendiğim hizmet: ${form.service}\n\n${form.message}`;
     window.open(`https://wa.me/${site.phoneTel.replace("+", "")}?text=${encodeURIComponent(text)}`, "_blank");
+    (window as unknown as { toaltechLead?: () => void }).toaltechLead?.();
     setSent(true);
   }
 

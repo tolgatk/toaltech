@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import ConditionalFooter from "@/components/ConditionalFooter";
 import ConditionalFloatingButtons from "@/components/ConditionalFloatingButtons";
 import MainShell from "@/components/MainShell";
+import GoogleAdsTag from "@/components/GoogleAdsTag";
 import { SITE_URL } from "@/lib/seo";
 
 const inter = Inter({ subsets: ["latin", "latin-ext"], variable: "--font-inter", display: "swap" });
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MainShell>{children}</MainShell>
         <ConditionalFooter />
         <ConditionalFloatingButtons />
+        <GoogleAdsTag />
       </body>
     </html>
   );
