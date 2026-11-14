@@ -21,7 +21,7 @@ import { abs } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 /** Gerçek video işlerinin gösterildiği hizmetler */
-const SHOWS_REELS = new Set(["sosyal-medya-danismanligi", "sosyal-medya-yonetimi", "reklam-danismanligi", "reklam-ajansi", "cafe-sosyal-medya-danismanligi", "restoran-sosyal-medya-danismanligi"]);
+const SHOWS_REELS = new Set(["sosyal-medya-danismanligi", "sosyal-medya-yonetimi", "reklam-danismanligi", "reklam-ajansi", "reklam-filmi-cekimi", "cafe-sosyal-medya-danismanligi", "restoran-sosyal-medya-danismanligi"]);
 
 export const dynamicParams = false;
 export function generateStaticParams() {

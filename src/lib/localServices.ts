@@ -103,10 +103,10 @@ export const localServices: LocalService[] = [
   },
   {
     slug: "reklam-filmi-cekimi",
-    districts: [],
+    districts: ["beylikduzu", "kadikoy", "sisli"],
     metaDescription: "İstanbul reklam filmi ve tanıtım filmi çekimi: senaryo, çekim, drone, kurgu, seslendirme ve altyazı tek ekipte. Yatay ve dikey teslim, reklamda kullanıma hazır.",
     fitSectors: ["eğitim", "restoran", "kafe", "otel", "düğün", "sağlık", "klinik", "emlak", "sanayi", "perakende", "turizm"],
-    localNote: "{ilce_deki} işletmeniz için reklam filmi çekimini yerinde yapıyoruz.",
+    localNote: "{ilce_deki} işletmeniz için reklam filmi ve tanıtım filmi çekimini yerinde yapıyoruz: senaryoyu birlikte netleştiriyor, çekim günü kamera, ışık ve ses ekipmanıyla {ilce_deki} mekânınıza geliyor, kurgulanmış filmi yatay ve dikey sürümleriyle teslim ediyoruz.",
     name: "Reklam Filmi Çekimi",
     keyword: "reklam filmi çekimi",
     intro: "İşletmeniz için reklam filmi, kurumsal tanıtım filmi ve sosyal medya reklam videosu çekiyoruz. Senaryo, çekim, drone, kurgu, seslendirme ve altyazı aynı ekipte; teslim edilen dosyalar reklamda kullanıma hazır.",
