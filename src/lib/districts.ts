@@ -6,6 +6,10 @@ export type District = {
   character: string;
   sectors: string[];
   tier: 1 | 2 | 3;
+  /** Fuar alanı gibi ilçe olmayan yerler */
+  kind?: "venue";
+  /** Yerin tam adı (yalnızca venue) */
+  fullName?: string;
 };
 
 export const districts: District[] = [
@@ -51,3 +55,38 @@ export const districts: District[] = [
 ];
 
 export const getDistrict = (slug: string) => districts.find((d) => d.slug === slug);
+
+/**
+ * Fuar alanları. İlçe değildir; yalnızca hizmet verisinde `venues` ile seçilen hizmetlerde sayfası açılır
+ * (ör. /reklam-filmi-cekimi/tuyap). `neighborhoods` burada alanın çevresidir.
+ */
+export const venues: District[] = [
+  {
+    kind: "venue",
+    name: "Tüyap",
+    fullName: "Tüyap Fuar ve Kongre Merkezi",
+    slug: "tuyap",
+    side: "Avrupa",
+    tier: 1,
+    neighborhoods: ["Tüyap Fuar ve Kongre Merkezi", "Beylikdüzü", "Büyükçekmece", "Esenyurt", "Avcılar"],
+    character:
+      "Tüyap Fuar ve Kongre Merkezi, Beylikdüzü ile Büyükçekmece arasında E-5 üzerinde yer alan, yıl boyunca sektörel fuarlara ev sahipliği yapan İstanbul'un başlıca fuar alanlarından biridir. Katılımcı firmalar için fuar günleri, ürünü ve standı binlerce ziyaretçiye aynı anda gösterme fırsatıdır; bu yüzden stant tanıtımı, ürün lansmanı ve röportaj çekimlerine en çok bu günlerde ihtiyaç duyulur.",
+    sectors: ["fuar katılımcısı", "sanayi ve üretim", "mobilya", "tekstil", "perakende"],
+  },
+  {
+    kind: "venue",
+    name: "İFM",
+    fullName: "İstanbul Fuar Merkezi (İFM)",
+    slug: "ifm",
+    side: "Avrupa",
+    tier: 1,
+    neighborhoods: ["İstanbul Fuar Merkezi", "Yeşilköy", "Bakırköy", "Florya", "Ataköy"],
+    character:
+      "İstanbul Fuar Merkezi (İFM), Bakırköy Yeşilköy'de Atatürk Havalimanı sahasının yanında yer alan, uluslararası sektörel fuarların düzenlendiği bir fuar alanıdır. Yabancı ziyaretçi ve alıcı heyetlerinin yoğun olduğu fuarlarda katılımcı firmalar; stant tanıtımı, ürün lansmanı ve ihracat sunumlarında kullanmak üzere video çekimine ihtiyaç duyar.",
+    sectors: ["fuar katılımcısı", "sanayi ve üretim", "mobilya", "tekstil", "ihracat"],
+  },
+];
+
+/** İlçeler ve fuar alanları birlikte */
+export const places: District[] = [...districts, ...venues];
+export const getPlace = (slug: string) => places.find((d) => d.slug === slug);

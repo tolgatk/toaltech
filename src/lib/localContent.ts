@@ -12,11 +12,12 @@ export function matchedSectors(s: LocalService, d: District) {
 }
 
 export function localNote(s: LocalService, d: District) {
-  return s.localNote.replaceAll("{ilce_deki}", deki(d.name)).replaceAll("{ilce_nin}", nin(d.name)).replaceAll("{ilce_de}", de(d.name)).replaceAll("{ilce}", d.name);
+  return (d.kind === "venue" && s.venueNote ? s.venueNote : s.localNote).replaceAll("{ilce_deki}", deki(d.name)).replaceAll("{ilce_nin}", nin(d.name)).replaceAll("{ilce_de}", de(d.name)).replaceAll("{ilce}", d.name);
 }
 
 /** İlçeye özel SSS */
 export function localFaq(s: LocalService, d: District) {
+  if (d.kind === "venue") return venueFaq(s, d);
   const secs = matchedSectors(s, d);
   const list = secs.slice(0, 3).join(", ");
   const faqs = [
@@ -52,4 +53,30 @@ export function localUseCases(c: ServiceContent, d: District) {
     return { u, i, score: words.filter((w) => text.includes(w.slice(0, 5))).length };
   });
   return scored.sort((a, b) => b.score - a.score || a.i - b.i).slice(0, 4).map((x) => x.u);
+}
+
+/** Fuar alanı sayfalarına özel SSS */
+function venueFaq(s: LocalService, d: District) {
+  const full = d.fullName ?? d.name;
+  const faqs = [
+    {
+      q: `${de(d.name)} fuar sırasında çekim yapıyor musunuz?`,
+      a: `Evet. ${full} içinde standınızda kurulum gününde ya da fuar günlerinde çekim yapıyoruz. Hangi gün ve saatte çekileceğini, kimlerle röportaj yapılacağını ve hangi ürünlerin gösterileceğini fuardan önce birlikte planlıyoruz.`,
+    },
+    {
+      q: `Fuar alanında çekim için izin gerekir mi?`,
+      a: `Katılımcı firmalar kendi stantlarında çekim yaptırabilir. Ekibimizin alana girişi için katılımcı ya da servis yaka kartı gerekir; bunu fuar öncesinde organizatörden sizin talep etmeniz gerekir. Stant dışındaki ortak alanlarda çekim kuralları fuar organizatörüne göre değiştiği için önceden sormanızı öneririz.`,
+    },
+    {
+      q: `Videoyu fuar bitmeden alabilir miyim?`,
+      a: `Fuar sürerken sosyal medyada paylaşılacak kısa videolar için hızlı teslim planlanabilir; bunun mümkün olup olmadığını ve teslim saatini çekimden önce netleştiriyoruz. Kurgulu özet film fuardan sonra teslim edilir.`,
+    },
+  ];
+  if (s.slug === "drone-cekimi") {
+    faqs.push({
+      q: `${de(d.name)} drone uçurulabilir mi?`,
+      a: `Salon içinde uçuş fuar organizatörünün iznine bağlıdır ve ziyaretçi varken yapılmaz; küçük FPV drone ile kurulum gününde ya da ziyaret saatleri dışında planlanır. Dış alanda uçuş için noktanın güncel uçuş durumuna çekimden önce bakıyoruz; izin gereken durumda süreci size önceden bildiriyoruz.`,
+    });
+  }
+  return faqs;
 }

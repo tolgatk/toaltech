@@ -15,6 +15,7 @@ export const de = (w: string) => `${w}'${possessiveCompound.includes(w) ? "n" : 
 export const deki = (w: string) => `${de(w)}ki`;
 /** Kadıköy'ün, Tuzla'nın, Şişli'nin, Beykoz'un */
 export const nin = (w: string) => {
+  if (w === "İFM") return "İFM'nin"; // kısaltma, "i-fe-me" okunur
   const v = lastVowel(w);
   const suf = "aı".includes(v) ? "ın" : "ei".includes(v) ? "in" : "ou".includes(v) ? "un" : "ün";
   return `${w}'${endsVowel(w) ? "n" : ""}${suf}`;

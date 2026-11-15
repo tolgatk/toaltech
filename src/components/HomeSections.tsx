@@ -10,7 +10,7 @@ import { posts } from "@/lib/posts";
 const wrap = "mx-auto max-w-7xl px-4 sm:px-6";
 
 /** Ana sayfada öne çıkan hizmetler, öncelik sırasıyla */
-const featured = ["sosyal-medya-yonetimi", "drone-cekimi", "yazilim-danismanligi", "web-tasarim", "sosyal-medya-danismanligi", "seo-hizmeti", "reklam-danismanligi", "urun-cekimi"]
+const featured = ["sosyal-medya-yonetimi", "drone-cekimi", "yazilim-danismanligi", "web-tasarim", "sosyal-medya-danismanligi", "seo-hizmeti", "reklam-ajansi", "reklam-filmi-cekimi", "urun-cekimi"]
   .map((x) => getLocalService(x))
   .filter((x): x is LocalService => !!x);
 

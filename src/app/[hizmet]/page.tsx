@@ -12,7 +12,7 @@ import { AnswerBox, FaqSection, Longform, PriceFactors, RelatedPosts, ScopeAndPr
 import ReelsMarquee from "@/components/showcase/ReelsMarquee";
 import { localServices, getLocalService, hasDistrictPage } from "@/lib/localServices";
 import { getServiceContent, serviceIcons } from "@/lib/serviceContent";
-import { districts } from "@/lib/districts";
+import { districts, venues } from "@/lib/districts";
 import { droneReels } from "@/lib/portfolio";
 import { serviceHubGraph, reelVideoNodes } from "@/lib/schema";
 import { abs } from "@/lib/seo";
@@ -54,6 +54,7 @@ export default async function Page({ params }: { params: Promise<{ hizmet: strin
   const groups = [
     { label: "Avrupa Yakası", list: byTier.filter((d) => d.side === "Avrupa") },
     { label: "Anadolu Yakası", list: byTier.filter((d) => d.side === "Anadolu") },
+    { label: "Fuar alanları", list: venues.filter((v) => hasDistrictPage(s, v.slug)) },
   ].filter((g) => g.list.length > 0);
   const others = c ? c.related.map((x) => getLocalService(x)).filter((x): x is NonNullable<typeof x> => !!x) : [];
   const rest = localServices.filter((o) => o.slug !== s.slug && !others.includes(o));

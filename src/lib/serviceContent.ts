@@ -58,7 +58,7 @@ export const serviceContent: Record<string, ServiceContent> = {
       { icon: HardHat, title: "İnşaat ve şantiye", text: "Her ay aynı noktadan, aynı açıyla çekim yapılarak ilerleme videosu hazırlanır; yatırımcı ve alıcıya düzenli rapor olarak gönderilir." },
       { icon: Factory, title: "Fabrika ve tesis", text: "Üretim alanı, depo ve sevkiyat sahasının gerçek büyüklüğünü kurumsal tanıtım filmi, katalog ve ihracat sunumları için gösterir." },
       { icon: Hotel, title: "Otel, bungalov ve restoran", text: "Havuz, bahçe, manzara ve mekânın konumu rezervasyon kararını etkiler. Gündüz, gün batımı ve gece çekimleri ayrı ayrı planlanır." },
-      { icon: PartyPopper, title: "Düğün, açılış ve etkinlik", text: "Kır düğünü, açılış, festival ve kurumsal etkinliklerde kalabalığı ve mekânı geniş açıyla kaydeder; kalabalık üzerinde uçuş kurallarına göre plan yapılır." },
+      { icon: PartyPopper, title: "Düğün, açılış ve etkinlik", text: "Kır düğünü, açılış, fuar, festival ve kurumsal etkinliklerde kalabalığı ve mekânı geniş açıyla kaydeder; kalabalık üzerinde uçuş kurallarına göre plan yapılır." },
       { icon: Ship, title: "Marina, tekne ve sahil", text: "Tekne, yat, plaj ve sahil işletmeleri için su üzerinde takip ve kuşbakışı planlar; rüzgâr durumuna göre çekim saati seçilir." },
       { icon: Tractor, title: "Arsa, arazi ve çiftlik", text: "Parselin sınırları, yola cephesi, eğimi ve çevresindeki yapılaşma havadan çekilen fotoğraf ve videoda net görünür." },
       { icon: Clapperboard, title: "Reklam filmi ve sosyal medya", text: "Reels, reklam filmi ve tanıtım videosu için açılış ve geçiş planları; FPV drone ile iç mekândan dışarıya kesintisiz geçişler." },
@@ -473,6 +473,7 @@ export const serviceContent: Record<string, ServiceContent> = {
       { icon: Hotel, title: "Mekân ve tesis tanıtımı", text: "Davet salonu, otel, restoran ve tesisler için mekânı gezdiren, konumu ve olanakları gösteren film; drone planlarıyla birlikte." },
       { icon: GraduationCap, title: "Kayıt ve kampanya filmi", text: "Okul, kurs ve klinikler için kayıt ya da kampanya dönemine özel, seslendirmeli ve altyazılı film." },
       { icon: Factory, title: "Fabrika ve üretim filmi", text: "Üretim hattını, kapasiteyi ve kalite sürecini gösteren film; ihracat sunumları ve bayi toplantıları için." },
+      { icon: PartyPopper, title: "Fuar ve etkinlik filmi", text: "Fuar standı tanıtımı, ürün lansmanı ve ziyaretçi röportajları; fuar sürerken paylaşılacak kısa videolar ve fuar sonrası özet film." },
       { icon: Smartphone, title: "Sosyal medya reklam videosu", text: "Dikey çekilen, ilk saniyede dikkat çeken kısa videolar; aynı çekimden birkaç farklı sürüm hazırlanır." },
     ],
     stepDetails: [

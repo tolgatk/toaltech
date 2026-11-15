@@ -1,3 +1,5 @@
+import { venues as venueList } from "./districts";
+
 export type LocalService = {
   slug: string;
   name: string;         // "Sosyal Medya Danışmanlığı"
@@ -14,10 +16,17 @@ export type LocalService = {
    * boş dizi yalnızca İstanbul ana sayfasını üretir (arama hacmi olmayan ilçelere ince sayfa açmamak için).
    */
   districts?: string[];
+  /** Sayfası açılacak fuar alanı slug'ları (districts.ts > venues) */
+  venues?: string[];
+  /** Fuar alanı sayfasında localNote yerine kullanılan giriş metni ({ilce} yer tutucuları aynı) */
+  venueNote?: string;
 };
 
 /** Hizmetin {ilce} sayfası var mı? */
-export const hasDistrictPage = (s: LocalService, districtSlug: string) => !s.districts || s.districts.includes(districtSlug);
+export const hasDistrictPage = (s: LocalService, districtSlug: string) =>
+  venueList.some((v) => v.slug === districtSlug)
+    ? !!s.venues?.includes(districtSlug)
+    : !s.districts || s.districts.includes(districtSlug);
 
 export const localServices: LocalService[] = [
   {
@@ -103,9 +112,11 @@ export const localServices: LocalService[] = [
   },
   {
     slug: "reklam-filmi-cekimi",
-    districts: ["beylikduzu", "kadikoy", "sisli"],
+    districts: ["beylikduzu", "kadikoy", "sisli", "esenyurt", "basaksehir", "atasehir"],
+    venues: ["tuyap", "ifm"],
+    venueNote: "{ilce_deki} fuar katılımınız için reklam filmi ve tanıtım filmi çekiyoruz: stant tanıtımı, ürün lansmanı, yetkili ve ziyaretçi röportajları. Çekim planını fuardan önce yapıyor, fuar günlerinde standınızda çekiyor; fuar sürerken paylaşacağınız kısa videoların ve fuar sonrası özet filmin teslim tarihini önceden netleştiriyoruz.",
     metaDescription: "İstanbul reklam filmi ve tanıtım filmi çekimi: senaryo, çekim, drone, kurgu, seslendirme ve altyazı tek ekipte. Yatay ve dikey teslim, reklamda kullanıma hazır.",
-    fitSectors: ["eğitim", "restoran", "kafe", "otel", "düğün", "sağlık", "klinik", "emlak", "sanayi", "perakende", "turizm"],
+    fitSectors: ["eğitim", "restoran", "kafe", "otel", "düğün", "sağlık", "klinik", "emlak", "sanayi", "OSB", "perakende", "turizm", "plaza", "finans", "fuar", "mobilya", "tekstil", "ihracat"],
     localNote: "{ilce_deki} işletmeniz için reklam filmi ve tanıtım filmi çekimini yerinde yapıyoruz: senaryoyu birlikte netleştiriyor, çekim günü kamera, ışık ve ses ekipmanıyla {ilce_deki} mekânınıza geliyor, kurgulanmış filmi yatay ve dikey sürümleriyle teslim ediyoruz.",
     name: "Reklam Filmi Çekimi",
     keyword: "reklam filmi çekimi",
@@ -168,6 +179,8 @@ export const localServices: LocalService[] = [
   },
   {
     slug: "drone-cekimi",
+    venues: ["tuyap"],
+    venueNote: "{ilce_deki} fuar katılımınız için drone ve FPV çekimi planlıyoruz. Salon içinde uçuş fuar organizatörünün iznine bağlıdır ve ziyaretçi yokken yapılır; dış alan çekimi için noktanın güncel uçuş durumuna önceden bakıyor, uygun değilse yerden çekimle aynı etkiyi verecek bir plan öneriyoruz.",
     metaDescription: "İstanbul drone çekimi: emlak, inşaat/şantiye, tesis ve etkinlik için 4K havadan video ve fotoğraf. Lokasyona göre uçuş uygunluğu ön kontrolü, kurgu dahil teslim.",
     fitSectors: ["emlak", "konut", "inşaat", "sanayi", "OSB", "tersane", "marina", "plaj", "sahil", "turizm", "otel", "düğün", "tarım", "çiftlik", "havalimanı", "liman", "villa", "fuar", "tema"],
     localNote: "{ilce} drone çekimi öncesinde lokasyonun uçuşa uygun olup olmadığına birlikte bakıyoruz; havalimanı, askeri bölge ve Boğaz hattı gibi kısıtlı alanlar için alternatif çekim planı öneriyoruz.",

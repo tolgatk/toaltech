@@ -27,7 +27,7 @@ const groups: { id: string; title: string; lead: string; slugs: string[] }[] = [
     id: "cekim",
     title: "Çekim ve prodüksiyon",
     lead: "Havadan ve yerden profesyonel çekim; web siteniz, ilanlarınız ve reklamlarınız için kullanıma hazır teslim.",
-    slugs: ["drone-cekimi", "urun-cekimi"],
+    slugs: ["drone-cekimi", "reklam-filmi-cekimi", "urun-cekimi"],
   },
   {
     id: "web",
@@ -39,7 +39,7 @@ const groups: { id: string; title: string; lead: string; slugs: string[] }[] = [
     id: "reklam",
     title: "Reklam",
     lead: "Bütçenizi ilçenize ve hedef kitlenize göre yöneten, sonucu mesaj ve satışla ölçen reklam yönetimi.",
-    slugs: ["reklam-danismanligi"],
+    slugs: ["reklam-ajansi", "reklam-danismanligi"],
   },
 ];
 

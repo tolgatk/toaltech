@@ -68,7 +68,7 @@ export const faqNode = (path: string, faqs: Faq[]) => ({
 export const homeGraph = { "@context": CTX, "@graph": [organizationNode, websiteNode, webPage("/", "ToalTech | İstanbul Sosyal Medya, Drone Çekimi, Web ve Yazılım", organizationNode.description)] };
 
 type S = { slug: string; name: string; intro: string; metaDescription: string; benefits: string[] };
-type D = { slug: string; name: string };
+type D = { slug: string; name: string; kind?: "venue"; fullName?: string };
 
 const offerCatalog = (s: S) => ({
   "@type": "OfferCatalog",
@@ -111,7 +111,7 @@ export const serviceDistrictGraph = (s: S, d: D, faqs: Faq[] = [], description?:
         url: abs(path),
         provider: { "@id": ORG_ID },
         isRelatedTo: { "@id": `${abs(`/${s.slug}`)}#service` },
-        areaServed: { "@type": "AdministrativeArea", name: d.name, containedInPlace: { "@type": "City", name: "İstanbul" } },
+        areaServed: { "@type": d.kind === "venue" ? "Place" : "AdministrativeArea", name: d.fullName ?? d.name, containedInPlace: { "@type": "City", name: "İstanbul" } },
       },
       ...(faqs.length ? [faqNode(path, faqs)] : []),
     ],

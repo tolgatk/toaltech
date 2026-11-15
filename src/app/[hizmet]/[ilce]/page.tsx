@@ -12,7 +12,7 @@ import ServiceHero from "@/components/service/ServiceHero";
 import { FaqSection, PriceFactors, RelatedPosts, ScopeAndProcess, UseCases } from "@/components/service/ServiceSections";
 import { localServices, getLocalService, hasDistrictPage } from "@/lib/localServices";
 import { getServiceContent, serviceIcons } from "@/lib/serviceContent";
-import { districts, getDistrict } from "@/lib/districts";
+import { places, getPlace } from "@/lib/districts";
 import { localFaq, localNote, localUseCases, matchedSectors } from "@/lib/localContent";
 import { droneReels } from "@/lib/portfolio";
 import { de, deki, nin } from "@/lib/tr";
@@ -25,12 +25,16 @@ const SHOWS_REELS = new Set(["sosyal-medya-danismanligi", "sosyal-medya-yonetimi
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return localServices.flatMap((s) => districts.filter((d) => hasDistrictPage(s, d.slug)).map((d) => ({ hizmet: s.slug, ilce: d.slug })));
+  return localServices.flatMap((s) => places.filter((d) => hasDistrictPage(s, d.slug)).map((d) => ({ hizmet: s.slug, ilce: d.slug })));
 }
 
 type Params = Promise<{ hizmet: string; ilce: string }>;
 
-const describe = (s: NonNullable<ReturnType<typeof getLocalService>>, d: NonNullable<ReturnType<typeof getDistrict>>) => {
+const describe = (s: NonNullable<ReturnType<typeof getLocalService>>, d: NonNullable<ReturnType<typeof getPlace>>) => {
+  if (d.kind === "venue")
+    return s.slug === "drone-cekimi"
+      ? `${d.name} ${s.keyword}: ${d.fullName} katılımcıları için salon içi FPV ve dış alan havadan çekim. Uçuş uygunluğuna önceden bakıyoruz. WhatsApp: ${site.phoneDisplay}.`
+      : `${d.name} ${s.keyword}: ${d.fullName} katılımcıları için fuar standı tanıtımı, ürün lansmanı ve röportaj çekimi. Fuar günlerinde standınızda. WhatsApp: ${site.phoneDisplay}.`;
   const secs = matchedSectors(s, d).slice(0, 2).join(" ve ");
   return `${d.name} ${s.keyword}: ${d.neighborhoods.slice(0, 2).join(", ")} dahil tüm ${de(d.name)} ${secs} işletmelerine yerinde hizmet. WhatsApp: ${site.phoneDisplay}.`;
 };
@@ -38,7 +42,7 @@ const describe = (s: NonNullable<ReturnType<typeof getLocalService>>, d: NonNull
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { hizmet, ilce } = await params;
   const s = getLocalService(hizmet);
-  const d = getDistrict(ilce);
+  const d = getPlace(ilce);
   if (!s || !d) return {};
   // Hizmetin başlığındaki açıklayıcı kısım ("4K Havadan Video ve Fotoğraf") ilçe başlığına da eklenir
   const tail = getServiceContent(s.slug)?.title.split(": ")[1];
@@ -51,7 +55,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 export default async function Page({ params }: { params: Params }) {
   const { hizmet, ilce } = await params;
   const s = getLocalService(hizmet);
-  const d = getDistrict(ilce);
+  const d = getPlace(ilce);
   if (!s || !d || !hasDistrictPage(s, d.slug)) notFound();
 
   const c = getServiceContent(s.slug);
@@ -61,8 +65,9 @@ export default async function Page({ params }: { params: Params }) {
   // İlçeye özel sorular önce, ardından hizmetin genel soruları
   const faqs = [...localFaq(s, d), ...(c?.faq.slice(0, 4) ?? []), ...s.faq.slice(0, 2)].filter((f, i, all) => all.findIndex((x) => x.q === f.q) === i);
   // Yalnızca birkaç ilçede sayfası olan hizmetlerde yaka ayrımı yapılmaz
-  const nearby = districts
-    .filter((x) => x.slug !== d.slug && hasDistrictPage(s, x.slug) && (s.districts || x.side === d.side))
+  const venue = d.kind === "venue";
+  const nearby = places
+    .filter((x) => x.slug !== d.slug && hasDistrictPage(s, x.slug) && (s.districts || venue || x.side === d.side))
     .sort((a, b) => a.tier - b.tier)
     .slice(0, 10);
   const others = localServices.filter((o) => o.slug !== s.slug && hasDistrictPage(o, d.slug)).slice(0, 6);
@@ -103,7 +108,7 @@ export default async function Page({ params }: { params: Params }) {
               ))}
             </ul>
 
-            <h3 className="mt-8 text-xl font-bold text-navy">{de(d.name)} hizmet verdiğimiz bölgeler</h3>
+            <h3 className="mt-8 text-xl font-bold text-navy">{venue ? `${d.name} ve çevresi` : `${de(d.name)} hizmet verdiğimiz bölgeler`}</h3>
             <ul className="mt-4 flex flex-wrap gap-2">
               {d.neighborhoods.map((n) => (
                 <li key={n} className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700">
@@ -111,7 +116,7 @@ export default async function Page({ params }: { params: Params }) {
                 </li>
               ))}
             </ul>
-            <p className="mt-3 text-sm text-slate-600">ve {nin(d.name)} tüm mahalleleri.</p>
+            {!venue && <p className="mt-3 text-sm text-slate-600">ve {nin(d.name)} tüm mahalleleri.</p>}
           </div>
 
           <aside className="self-start rounded-3xl bg-navy p-7 text-white lg:sticky lg:top-28">
@@ -138,7 +143,7 @@ export default async function Page({ params }: { params: Params }) {
           c={c}
           items={localUseCases(c, d)}
           title={`${de(d.name)} ${s.keyword} hangi işlerde kullanılır?`}
-          lead={`${nin(d.name)} iş dokusuna göre en sık karşılaştığımız ihtiyaçlar:`}
+          lead={venue ? "Fuar katılımcılarının en sık istediği işler:" : `${nin(d.name)} iş dokusuna göre en sık karşılaştığımız ihtiyaçlar:`}
         />
       )}
 
@@ -152,7 +157,7 @@ export default async function Page({ params }: { params: Params }) {
       <section aria-label="İlgili sayfalar" className="py-14">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2">
           <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
-            <h2 className="text-xl font-extrabold text-navy">Yakın ilçelerde {s.name}</h2>
+            <h2 className="text-xl font-extrabold text-navy">{venue ? `İlçelerde ${s.name}` : `Yakın ilçelerde ${s.name}`}</h2>
             <ul className="mt-4 flex flex-wrap gap-2">
               {nearby.map((n) => (
                 <li key={n.slug}>
