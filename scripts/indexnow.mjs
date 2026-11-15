@@ -12,7 +12,8 @@ if (!urls.length) {
 }
 const res = await fetch("https://api.indexnow.org/indexnow", {
   method: "POST",
-  headers: { "Content-Type": "application/json; charset=utf-8" },
+  // Node'un varsayılan istemci kimliğiyle gelen istekler 403 alıyor; tarayıcı benzeri bir kimlik gerekir
+  headers: { "Content-Type": "application/json; charset=utf-8", "User-Agent": "Mozilla/5.0 (compatible; toaltech-indexnow/1.0)" },
   body: JSON.stringify({ host: HOST, key: KEY, keyLocation: base + "/" + KEY + ".txt", urlList: urls }),
 });
 console.log(urls.length + " adres gönderildi, yanıt: " + res.status + " " + res.statusText);
